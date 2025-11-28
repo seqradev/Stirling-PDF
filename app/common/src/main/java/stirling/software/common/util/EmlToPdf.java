@@ -20,7 +20,7 @@ public class EmlToPdf {
         return EmlProcessingUtils.generateEnhancedEmailHtml(emailContent, request, null);
     }
 
-    public static byte[] convertEmlToPdf(
+    public static byte[] convertEmlToPdk(
             String weasyprintPath,
             EmlToPdfRequest request,
             byte[] emlBytes,

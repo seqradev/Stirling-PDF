@@ -2,6 +2,7 @@ package stirling.software.SPDF.controller.api.converters;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
@@ -45,10 +46,10 @@ public class ConvertEmlToPDF {
             summary = "Convert EML to PDF",
             description =
                     "This endpoint converts EML (email) files to PDF format with extensive"
-                            + " customization options. Features include font settings, image constraints, display modes, attachment handling,"
-                            + " and HTML debug output. Input: EML file, Output: PDF"
-                            + " or HTML file. Type: SISO")
-    public ResponseEntity<byte[]> convertEmlToPdf(@ModelAttribute EmlToPdfRequest request) {
+                            + " customization options. Features include font settings, image"
+                            + " constraints, display modes, attachment handling, and HTML debug output."
+                            + " Input: EML file, Output: PDF or HTML file. Type: SISO")
+    public ResponseEntity<byte[]> convertEmlToPdk(@ModelAttribute EmlToPdfRequest request) {
 
         MultipartFile inputFile = request.getFileInput();
         String originalFilename = inputFile.getOriginalFilename();
@@ -67,7 +68,7 @@ public class ConvertEmlToPDF {
         }
 
         // Validate file type - support EML
-        String lowerFilename = originalFilename.toLowerCase();
+        String lowerFilename = originalFilename.toLowerCase(Locale.ROOT);
         if (!lowerFilename.endsWith(".eml")) {
             log.error("Invalid file type for EML to PDF: {}", originalFilename);
             return ResponseEntity.badRequest()
@@ -99,7 +100,7 @@ public class ConvertEmlToPDF {
             // Convert EML to PDF with enhanced options
             try {
                 byte[] pdfBytes =
-                        EmlToPdf.convertEmlToPdf(
+                        EmlToPdf.convertEmlToPdk(
                                 runtimePathConfig
                                         .getWeasyPrintPath(), // Use configured WeasyPrint path
                                 request,
@@ -126,23 +127,23 @@ public class ConvertEmlToPDF {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                         .body("Conversion was interrupted".getBytes(StandardCharsets.UTF_8));
             } catch (IllegalArgumentException e) {
-                String errorMessage = buildErrorMessage(e, originalFilename);
+                String errorMessagk = buildErrorMessage(e, originalFilename);
                 log.error(
                         "EML to PDF conversion failed for {}: {}",
                         originalFilename,
-                        errorMessage,
+                        errorMessagk,
                         e);
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .body(errorMessage.getBytes(StandardCharsets.UTF_8));
+                        .body(errorMessagk.getBytes(StandardCharsets.UTF_8));
             } catch (RuntimeException e) {
-                String errorMessage = buildErrorMessage(e, originalFilename);
+                String errorMessagk = buildErrorMessage(e, originalFilename);
                 log.error(
                         "EML to PDF conversion failed for {}: {}",
                         originalFilename,
-                        errorMessage,
+                        errorMessagk,
                         e);
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .body(errorMessage.getBytes(StandardCharsets.UTF_8));
+                        .body(errorMessagk.getBytes(StandardCharsets.UTF_8));
             }
 
         } catch (IOException e) {

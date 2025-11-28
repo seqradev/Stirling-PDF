@@ -7,7 +7,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 import javax.imageio.ImageIO;
 
@@ -42,6 +46,7 @@ import lombok.RequiredArgsConstructor;
 
 import stirling.software.SPDF.model.api.misc.AddStampRequest;
 import stirling.software.common.service.CustomPDFDocumentFactory;
+import stirling.software.common.util.ExceptionUtils;
 import stirling.software.common.util.GeneralUtils;
 import stirling.software.common.util.RegexPatternUtils;
 import stirling.software.common.util.TempFile;
@@ -86,7 +91,8 @@ public class StampController {
         MultipartFile pdfFile = request.getFileInput();
         String pdfFileName = pdfFile.getOriginalFilename();
         if (pdfFileName.contains("..") || pdfFileName.startsWith("/")) {
-            throw new IllegalArgumentException("Invalid PDF file path");
+            throw ExceptionUtils.createIllegalArgumentException(
+                    "error.invalid.filepath", "Invalid PDF file path: " + pdfFileName);
         }
 
         String stampType = request.getStampType();
@@ -94,14 +100,19 @@ public class StampController {
         MultipartFile stampImage = request.getStampImage();
         if ("image".equalsIgnoreCase(stampType)) {
             if (stampImage == null) {
-                throw new IllegalArgumentException(
+                throw ExceptionUtils.createIllegalArgumentException(
+                        "error.stamp.image.required",
                         "Stamp image file must be provided when stamp type is 'image'");
             }
             String stampImageName = stampImage.getOriginalFilename();
             if (stampImageName == null
                     || stampImageName.contains("..")
                     || stampImageName.startsWith("/")) {
-                throw new IllegalArgumentException("Invalid stamp image file path");
+                throw ExceptionUtils.createIllegalArgumentException(
+                        "error.invalidFormat",
+                        "Invalid {0} format: {1}",
+                        "stamp image file path",
+                        stampImageName);
             }
         }
         String alphabet = request.getAlphabet();
@@ -114,7 +125,7 @@ public class StampController {
 
         String customColor = request.getCustomColor();
         float marginFactor =
-                switch (request.getCustomMargin().toLowerCase()) {
+                switch (request.getCustomMargin().toLowerCase(Locale.ROOT)) {
                     case "small" -> 0.02f;
                     case "medium" -> 0.035f;
                     case "large" -> 0.05f;
@@ -247,6 +258,18 @@ public class StampController {
                     calculatePositionY(
                             pageSize, position, calculateTextCapHeight(font, fontSize), margin);
         }
+
+        String currentDate = LocalDate.now().toString();
+        String currentTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+
+        int pageCount = document.getNumberOfPages();
+
+        String processedStampText =
+                stampText
+                        .replace("@date", currentDate)
+                        .replace("@time", currentTime)
+                        .replace("@page_count", String.valueOf(pageCount));
+
         // Split the stampText into multiple lines
         String[] lines =
                 RegexPatternUtils.getInstance().getEscapedNewlinePattern().split(stampText);
