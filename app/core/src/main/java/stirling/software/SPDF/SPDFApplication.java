@@ -10,9 +10,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.context.WebServerInitializedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
@@ -23,10 +24,10 @@ import jakarta.annotation.PreDestroy;
 
 import lombok.extern.slf4j.Slf4j;
 
-import stirling.software.SPDF.UI.WebBrowser;
 import stirling.software.common.configuration.AppConfig;
 import stirling.software.common.configuration.ConfigInitializer;
 import stirling.software.common.configuration.InstallationPathConfig;
+import stirling.software.common.model.ApplicationProperties;
 import stirling.software.common.util.UrlUtils;
 
 @Slf4j
@@ -45,15 +46,13 @@ public class SPDFApplication {
 
     private final AppConfig appConfig;
     private final Environment env;
-    private final WebBrowser webBrowser;
+    private final ApplicationProperties applicationProperties;
 
     public SPDFApplication(
-            AppConfig appConfig,
-            Environment env,
-            @Autowired(required = false) WebBrowser webBrowser) {
+            AppConfig appConfig, Environment env, ApplicationProperties applicationProperties) {
         this.appConfig = appConfig;
         this.env = env;
-        this.webBrowser = webBrowser;
+        this.applicationProperties = applicationProperties;
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -147,28 +146,38 @@ public class SPDFApplication {
         serverPortStatic = serverPort;
         String url = baseUrl + ":" + getStaticPort() + contextPath;
 
-        if (webBrowser != null
-                && Boolean.parseBoolean(System.getProperty("STIRLING_PDF_DESKTOP_UI", "false"))) {
-            webBrowser.initWebUI(url);
-        } else {
-            String browserOpenEnv = env.getProperty("BROWSER_OPEN");
-            boolean browserOpen = browserOpenEnv != null && "true".equalsIgnoreCase(browserOpenEnv);
-            if (browserOpen) {
-                try {
-                    String os = System.getProperty("os.name").toLowerCase();
-                    Runtime rt = Runtime.getRuntime();
+        // Log Tauri mode information
+        if (Boolean.parseBoolean(System.getProperty("STIRLING_PDF_TAURI_MODE", "false"))) {
+            String parentPid = System.getenv("TAURI_PARENT_PID");
+            log.info(
+                    "Running in Tauri mode. Parent process PID: {}",
+                    parentPid != null ? parentPid : "not set");
+        }
+        // Desktop UI initialization removed - webBrowser dependency eliminated
+        // Keep backwards compatibility for STIRLING_PDF_DESKTOP_UI system property
+        if (Boolean.parseBoolean(System.getProperty("STIRLING_PDF_DESKTOP_UI", "false"))) {
+            log.info("Desktop UI mode enabled, but WebBrowser functionality has been removed");
+            // webBrowser.initWebUI(url); // Removed - desktop UI eliminated
+        }
 
-                    if (os.contains("win")) {
-                        // For Windows
-                        SystemCommand.runCommand(rt, "rundll32 url.dll,FileProtocolHandler " + url);
-                    } else if (os.contains("mac")) {
-                        SystemCommand.runCommand(rt, "open " + url);
-                    } else if (os.contains("nix") || os.contains("nux")) {
-                        SystemCommand.runCommand(rt, "xdg-open " + url);
-                    }
-                } catch (IOException e) {
-                    log.error("Error opening browser: {}", e.getMessage());
+        // Standard browser opening logic
+        String browserOpenEnv = env.getProperty("BROWSER_OPEN");
+        boolean browserOpen = browserOpenEnv != null && "true".equalsIgnoreCase(browserOpenEnv);
+        if (browserOpen) {
+            try {
+                String os = System.getProperty("os.name").toLowerCase();
+                Runtime rt = Runtime.getRuntime();
+
+                if (os.contains("win")) {
+                    // For Windows
+                    SystemCommand.runCommand(rt, "rundll32 url.dll,FileProtocolHandler " + url);
+                } else if (os.contains("mac")) {
+                    SystemCommand.runCommand(rt, "open " + url);
+                } else if (os.contains("nix") || os.contains("nux")) {
+                    SystemCommand.runCommand(rt, "xdg-open " + url);
                 }
+            } catch (IOException e) {
+                log.error("Error opening browser: {}", e.getMessage());
             }
         }
     }
@@ -185,9 +194,18 @@ public class SPDFApplication {
 
     @PreDestroy
     public void cleanup() {
-        if (webBrowser != null) {
-            webBrowser.cleanup();
-        }
+        // webBrowser cleanup removed - desktop UI eliminated
+        // if (webBrowser != null) {
+        //     webBrowser.cleanup();
+        // }
+    }
+
+    @EventListener
+    public void onWebServerInitialized(WebServerInitializedEvent event) {
+        int actualPort = event.getWebServer().getPort();
+        serverPortStatic = String.valueOf(actualPort);
+        // Log the actual runtime port for Tauri to parse
+        log.info("Stirling-PDF running on port: {}", actualPort);
     }
 
     private static void printStartupLogs() {

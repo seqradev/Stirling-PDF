@@ -3,7 +3,6 @@ ignore = [
     'lang.div',
     'lang.dzo',
     'lang.que',
-    'language.direction',
 ]
 
 [az_AZ]
@@ -51,7 +50,6 @@ ignore = [
 
 [ca_CA]
 ignore = [
-    'adminUserSettings.admin',
     'lang.amh',
     'lang.ceb',
     'lang.chr',
@@ -193,8 +191,6 @@ ignore = [
     'AddStampRequest.alphabet',
     'AddStampRequest.position',
     'PDFToBook.selectText.1',
-    'PDFToText.tags',
-    'addPageNumbers.selectText.3',
     'adminUserSettings.team',
     'alphabet',
     'audit.dashboard.modal.id',
@@ -204,7 +200,6 @@ ignore = [
     'audit.dashboard.table.details',
     'audit.dashboard.table.id',
     'certSign.name',
-    'cookieBanner.popUp.acceptAllBtn',
     'endpointStatistics.top10',
     'endpointStatistics.top20',
     'fileChooser.dragAndDrop',
@@ -246,7 +241,6 @@ ignore = [
     'team.status',
     'text',
     'update.version',
-    'validateSignature.cert.bits',
     'validateSignature.cert.version',
     'validateSignature.status',
     'watermark.type.1',
@@ -313,9 +307,7 @@ ignore = [
 ]
 
 [fa_IR]
-ignore = [
-    'language.direction',
-]
+ignore = []
 
 [fr_FR]
 ignore = [
@@ -323,7 +315,6 @@ ignore = [
     'AddStampRequest.position',
     'AddStampRequest.rotation',
     'PDFToBook.selectText.1',
-    'addPageNumbers.selectText.3',
     'adminUserSettings.actions',
     'alphabet',
     'compare.document.1',
@@ -416,8 +407,6 @@ ignore = [
     'endpointStatistics.top20',
     'home.pipeline.title',
     'language.direction',
-    'pipeline.title',
-    'pipelineOptions.pipelineHeader',
     'pro',
     'showJS.tags',
 ]
@@ -526,6 +515,11 @@ ignore = [
     'language.direction',
 ]
 
+[ml_ML]
+ignore = [
+    'language.direction',
+]
+
 [nl_NL]
 ignore = [
     'compare.document.1',
@@ -615,7 +609,6 @@ ignore = [
     'lang.urd',
     'lang.yor',
     'language.direction',
-    'oops',
     'sponsor',
 ]
 
@@ -770,7 +763,6 @@ ignore = [
 [sk_SK]
 ignore = [
     'adminUserSettings.admin',
-    'home.multiTool.title',
     'info',
     'lang.ceb',
     'lang.chr',
@@ -792,7 +784,6 @@ ignore = [
     'lang.urd',
     'lang.uzb',
     'language.direction',
-    'navbar.sections.security',
     'text',
     'watermark.type.1',
 ]
@@ -842,7 +833,6 @@ ignore = [
     'endpointStatistics.top10',
     'endpointStatistics.top20',
     'font',
-    'info',
     'lang.div',
     'lang.epo',
     'lang.hin',
@@ -900,7 +890,6 @@ ignore = [
     'lang.tir',
     'lang.uzb_cyrl',
     'language.direction',
-    'pipelineOptions.pipelineHeader',
     'showJS.tags',
 ]
 
@@ -974,9 +963,13 @@ ignore = [
     'lang.yid',
     'lang.yor',
     'language.direction',
-    'pipeline.title',
     'pipelineOptions.pipelineHeader',
     'showJS.tags',
+]
+
+[zh_BO]
+ignore = [
+    'language.direction',
 ]
 
 [zh_CN]
@@ -987,6 +980,5 @@ ignore = [
 [zh_TW]
 ignore = [
     'language.direction',
-    'poweredBy',
     'showJS.tags',
 ]

@@ -56,7 +56,7 @@ public class PostHogService {
     }
 
     private void captureSystemInfo() {
-        if (!applicationProperties.getSystem().isAnalyticsEnabled()) {
+        if (!applicationProperties.getSystem().isPosthogEnabled()) {
             return;
         }
         try {
@@ -67,7 +67,7 @@ public class PostHogService {
     }
 
     public void captureEvent(String eventName, Map<String, Object> properties) {
-        if (!applicationProperties.getSystem().isAnalyticsEnabled()) {
+        if (!applicationProperties.getSystem().isPosthogEnabled()) {
             return;
         }
 
@@ -254,10 +254,7 @@ public class PostHogService {
                 properties,
                 "security_enableLogin",
                 applicationProperties.getSecurity().getEnableLogin());
-        addIfNotEmpty(
-                properties,
-                "security_csrfDisabled",
-                applicationProperties.getSecurity().getCsrfDisabled());
+        addIfNotEmpty(properties, "security_csrfDisabled", true);
         addIfNotEmpty(
                 properties,
                 "security_loginAttemptCount",
@@ -325,13 +322,16 @@ public class PostHogService {
                 properties,
                 "system_enableAnalytics",
                 applicationProperties.getSystem().isAnalyticsEnabled());
-
-        // Capture UI properties
-        addIfNotEmpty(properties, "ui_appName", applicationProperties.getUi().getAppName());
         addIfNotEmpty(
                 properties,
-                "ui_homeDescription",
-                applicationProperties.getUi().getHomeDescription());
+                "system_enablePosthog",
+                applicationProperties.getSystem().isPosthogEnabled());
+        addIfNotEmpty(
+                properties,
+                "system_enableScarf",
+                applicationProperties.getSystem().isScarfEnabled());
+
+        // Capture UI properties
         addIfNotEmpty(
                 properties, "ui_appNameNavbar", applicationProperties.getUi().getAppNameNavbar());
 

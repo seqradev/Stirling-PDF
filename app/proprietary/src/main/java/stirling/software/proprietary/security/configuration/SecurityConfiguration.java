@@ -1,6 +1,6 @@
 package stirling.software.proprietary.security.configuration;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,26 +24,26 @@ import org.springframework.security.saml2.provider.service.web.authentication.Op
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 import org.springframework.security.web.savedrequest.NullRequestCache;
 import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import lombok.extern.slf4j.Slf4j;
 
 import stirling.software.common.configuration.AppConfig;
 import stirling.software.common.model.ApplicationProperties;
+import stirling.software.common.util.RequestUriUtils;
 import stirling.software.proprietary.security.CustomAuthenticationFailureHandler;
 import stirling.software.proprietary.security.CustomAuthenticationSuccessHandler;
 import stirling.software.proprietary.security.CustomLogoutSuccessHandler;
 import stirling.software.proprietary.security.JwtAuthenticationEntryPoint;
 import stirling.software.proprietary.security.database.repository.JPATokenRepositoryImpl;
 import stirling.software.proprietary.security.database.repository.PersistentLoginRepository;
-import stirling.software.proprietary.security.filter.FirstLoginFilter;
 import stirling.software.proprietary.security.filter.IPRateLimitingFilter;
 import stirling.software.proprietary.security.filter.JwtAuthenticationFilter;
 import stirling.software.proprietary.security.filter.UserAuthenticationFilter;
-import stirling.software.proprietary.security.model.User;
 import stirling.software.proprietary.security.oauth2.CustomOAuth2AuthenticationFailureHandler;
 import stirling.software.proprietary.security.oauth2.CustomOAuth2AuthenticationSuccessHandler;
 import stirling.software.proprietary.security.saml2.CustomSaml2AuthenticationFailureHandler;
@@ -68,18 +68,20 @@ public class SecurityConfiguration {
     private final boolean loginEnabledValue;
     private final boolean runningProOrHigher;
 
+    private final ApplicationProperties applicationProperties;
     private final ApplicationProperties.Security securityProperties;
     private final AppConfig appConfig;
     private final UserAuthenticationFilter userAuthenticationFilter;
     private final JwtServiceInterface jwtService;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final LoginAttemptService loginAttemptService;
-    private final FirstLoginFilter firstLoginFilter;
     private final SessionPersistentRegistry sessionRegistry;
     private final PersistentLoginRepository persistentLoginRepository;
     private final GrantedAuthoritiesMapper oAuth2userAuthoritiesMapper;
     private final RelyingPartyRegistrationRepository saml2RelyingPartyRegistrations;
     private final OpenSaml4AuthenticationRequestResolver saml2AuthenticationRequestResolver;
+    private final stirling.software.proprietary.service.UserLicenseSettingsService
+            licenseSettingsService;
 
     public SecurityConfiguration(
             PersistentLoginRepository persistentLoginRepository,
@@ -88,115 +90,137 @@ public class SecurityConfiguration {
             @Qualifier("loginEnabled") boolean loginEnabledValue,
             @Qualifier("runningProOrHigher") boolean runningProOrHigher,
             AppConfig appConfig,
+            ApplicationProperties applicationProperties,
             ApplicationProperties.Security securityProperties,
             UserAuthenticationFilter userAuthenticationFilter,
             JwtServiceInterface jwtService,
             JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
             LoginAttemptService loginAttemptService,
-            FirstLoginFilter firstLoginFilter,
             SessionPersistentRegistry sessionRegistry,
             @Autowired(required = false) GrantedAuthoritiesMapper oAuth2userAuthoritiesMapper,
             @Autowired(required = false)
                     RelyingPartyRegistrationRepository saml2RelyingPartyRegistrations,
             @Autowired(required = false)
-                    OpenSaml4AuthenticationRequestResolver saml2AuthenticationRequestResolver) {
+                    OpenSaml4AuthenticationRequestResolver saml2AuthenticationRequestResolver,
+            stirling.software.proprietary.service.UserLicenseSettingsService
+                    licenseSettingsService) {
         this.userDetailsService = userDetailsService;
         this.userService = userService;
         this.loginEnabledValue = loginEnabledValue;
         this.runningProOrHigher = runningProOrHigher;
         this.appConfig = appConfig;
+        this.applicationProperties = applicationProperties;
         this.securityProperties = securityProperties;
         this.userAuthenticationFilter = userAuthenticationFilter;
         this.jwtService = jwtService;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
         this.loginAttemptService = loginAttemptService;
-        this.firstLoginFilter = firstLoginFilter;
         this.sessionRegistry = sessionRegistry;
         this.persistentLoginRepository = persistentLoginRepository;
         this.oAuth2userAuthoritiesMapper = oAuth2userAuthoritiesMapper;
         this.saml2RelyingPartyRegistrations = saml2RelyingPartyRegistrations;
         this.saml2AuthenticationRequestResolver = saml2AuthenticationRequestResolver;
+        this.licenseSettingsService = licenseSettingsService;
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        if (securityProperties.getCsrfDisabled() || !loginEnabledValue) {
-            http.csrf(CsrfConfigurer::disable);
+    public CorsConfigurationSource corsConfigurationSource() {
+        List<String> configuredOrigins = null;
+        if (applicationProperties.getSystem() != null) {
+            configuredOrigins = applicationProperties.getSystem().getCorsAllowedOrigins();
         }
 
-        if (loginEnabledValue) {
-            boolean v2Enabled = appConfig.v2Enabled();
+        CorsConfiguration cfg = new CorsConfiguration();
+        if (configuredOrigins != null && !configuredOrigins.isEmpty()) {
+            cfg.setAllowedOriginPatterns(configuredOrigins);
+            log.debug(
+                    "CORS configured with allowed origin patterns from settings.yml: {}",
+                    configuredOrigins);
+        } else {
+            // Default to allowing all origins when nothing is configured
+            cfg.setAllowedOriginPatterns(List.of("*"));
+            log.info(
+                    "No CORS allowed origins configured in settings.yml (system.corsAllowedOrigins); allowing all origins.");
+        }
 
-            if (v2Enabled) {
-                http.addFilterBefore(
-                                jwtAuthenticationFilter(),
-                                UsernamePasswordAuthenticationFilter.class)
-                        .exceptionHandling(
-                                exceptionHandling ->
-                                        exceptionHandling.authenticationEntryPoint(
-                                                jwtAuthenticationEntryPoint));
-            }
+        // Explicitly configure supported HTTP methods (include OPTIONS for preflight)
+        cfg.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+
+        cfg.setAllowedHeaders(
+                List.of(
+                        "Authorization",
+                        "Content-Type",
+                        "X-Requested-With",
+                        "Accept",
+                        "Origin",
+                        "X-API-KEY",
+                        "X-CSRF-TOKEN",
+                        "X-XSRF-TOKEN"));
+
+        cfg.setExposedHeaders(
+                List.of(
+                        "WWW-Authenticate",
+                        "X-Total-Count",
+                        "X-Page-Number",
+                        "X-Page-Size",
+                        "Content-Disposition",
+                        "Content-Type"));
+
+        cfg.setAllowCredentials(true);
+        cfg.setMaxAge(3600L);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", cfg);
+        return source;
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(
+            HttpSecurity http,
+            @Lazy IPRateLimitingFilter rateLimitingFilter,
+            @Lazy JwtAuthenticationFilter jwtAuthenticationFilter)
+            throws Exception {
+        // Enable CORS only if we have configured origins
+        CorsConfigurationSource corsSource = corsConfigurationSource();
+        if (corsSource != null) {
+            http.cors(cors -> cors.configurationSource(corsSource));
+        } else {
+            // Explicitly disable CORS when no origins are configured
+            http.cors(cors -> cors.disable());
+        }
+
+        http.csrf(CsrfConfigurer::disable);
+
+        if (loginEnabledValue) {
+
             http.addFilterBefore(
                             userAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                    .addFilterAfter(rateLimitingFilter(), UserAuthenticationFilter.class)
-                    .addFilterAfter(firstLoginFilter, UsernamePasswordAuthenticationFilter.class);
-
-            if (!securityProperties.getCsrfDisabled()) {
-                CookieCsrfTokenRepository cookieRepo =
-                        CookieCsrfTokenRepository.withHttpOnlyFalse();
-                CsrfTokenRequestAttributeHandler requestHandler =
-                        new CsrfTokenRequestAttributeHandler();
-                requestHandler.setCsrfRequestAttributeName(null);
-                http.csrf(
-                        csrf ->
-                                csrf.ignoringRequestMatchers(
-                                                request -> {
-                                                    String apiKey = request.getHeader("X-API-KEY");
-                                                    // If there's no API key, don't ignore CSRF
-                                                    // (return false)
-                                                    if (apiKey == null || apiKey.trim().isEmpty()) {
-                                                        return false;
-                                                    }
-                                                    // Validate API key using existing UserService
-                                                    try {
-                                                        Optional<User> user =
-                                                                userService.getUserByApiKey(apiKey);
-                                                        // If API key is valid, ignore CSRF (return
-                                                        // true)
-                                                        // If API key is invalid, don't ignore CSRF
-                                                        // (return false)
-                                                        return user.isPresent();
-                                                    } catch (Exception e) {
-                                                        // If there's any error validating the API
-                                                        // key, don't ignore CSRF
-                                                        return false;
-                                                    }
-                                                })
-                                        .csrfTokenRepository(cookieRepo)
-                                        .csrfTokenRequestHandler(requestHandler));
-            }
+                    .addFilterBefore(rateLimitingFilter, UsernamePasswordAuthenticationFilter.class)
+                    .addFilterBefore(jwtAuthenticationFilter, UserAuthenticationFilter.class);
 
             http.sessionManagement(
-                    sessionManagement -> {
-                        if (v2Enabled) {
+                    sessionManagement ->
                             sessionManagement.sessionCreationPolicy(
-                                    SessionCreationPolicy.STATELESS);
-                        } else {
-                            sessionManagement
-                                    .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                                    .maximumSessions(10)
-                                    .maxSessionsPreventsLogin(false)
-                                    .sessionRegistry(sessionRegistry)
-                                    .expiredUrl("/login?logout=true");
-                        }
-                    });
+                                    SessionCreationPolicy.STATELESS));
             http.authenticationProvider(daoAuthenticationProvider());
             http.requestCache(requestCache -> requestCache.requestCache(new NullRequestCache()));
+
+            // Configure exception handling for API endpoints
+            http.exceptionHandling(
+                    exceptions ->
+                            exceptions.defaultAuthenticationEntryPointFor(
+                                    jwtAuthenticationEntryPoint,
+                                    request -> {
+                                        String contextPath = request.getContextPath();
+                                        String requestURI = request.getRequestURI();
+                                        return requestURI.startsWith(contextPath + "/api/");
+                                    }));
+
             http.logout(
                     logout ->
                             logout.logoutRequestMatcher(
@@ -229,41 +253,28 @@ public class SecurityConfiguration {
                                             req -> {
                                                 String uri = req.getRequestURI();
                                                 String contextPath = req.getContextPath();
-
-                                                // Remove the context path from the URI
-                                                String trimmedUri =
-                                                        uri.startsWith(contextPath)
-                                                                ? uri.substring(
-                                                                        contextPath.length())
-                                                                : uri;
-                                                return trimmedUri.startsWith("/login")
-                                                        || trimmedUri.startsWith("/oauth")
-                                                        || trimmedUri.startsWith("/saml2")
-                                                        || trimmedUri.endsWith(".svg")
-                                                        || trimmedUri.startsWith("/register")
-                                                        || trimmedUri.startsWith("/error")
-                                                        || trimmedUri.startsWith("/images/")
-                                                        || trimmedUri.startsWith("/public/")
-                                                        || trimmedUri.startsWith("/css/")
-                                                        || trimmedUri.startsWith("/fonts/")
-                                                        || trimmedUri.startsWith("/js/")
-                                                        || trimmedUri.startsWith("/pdfjs/")
-                                                        || trimmedUri.startsWith("/pdfjs-legacy/")
-                                                        || trimmedUri.startsWith("/favicon")
-                                                        || trimmedUri.startsWith(
-                                                                "/api/v1/info/status")
-                                                        || trimmedUri.startsWith("/v1/api-docs")
-                                                        || uri.contains("/v1/api-docs");
+                                                // Check if it's a public auth endpoint or static
+                                                // resource
+                                                return RequestUriUtils.isStaticResource(
+                                                                contextPath, uri)
+                                                        || RequestUriUtils.isPublicAuthEndpoint(
+                                                                uri, contextPath);
                                             })
                                     .permitAll()
                                     .anyRequest()
                                     .authenticated());
             // Handle User/Password Logins
             if (securityProperties.isUserPass()) {
+                // v2: Authentication is handled via API (/api/v1/auth/login), not form login
+                // We configure form login to handle Spring Security redirects,
+                // but use /perform_login as the processing URL so /login remains a React route
                 http.formLogin(
                         formLogin ->
                                 formLogin
-                                        .loginPage("/login")
+                                        .loginPage("/login") // Redirect here when unauthenticated
+                                        .loginProcessingUrl(
+                                                "/perform_login") // Process form posts here (not
+                                        // /login)
                                         .successHandler(
                                                 new CustomAuthenticationSuccessHandler(
                                                         loginAttemptService,
@@ -277,33 +288,30 @@ public class SecurityConfiguration {
             // Handle OAUTH2 Logins
             if (securityProperties.isOauth2Active()) {
                 http.oauth2Login(
-                        oauth2 ->
-                                oauth2.loginPage("/oauth2")
-                                        /*
-                                        This Custom handler is used to check if the OAUTH2 user trying to log in, already exists in the database.
-                                        If user exists, login proceeds as usual. If user does not exist, then it is auto-created but only if 'OAUTH2AutoCreateUser'
-                                        is set as true, else login fails with an error message advising the same.
-                                         */
-                                        .successHandler(
-                                                new CustomOAuth2AuthenticationSuccessHandler(
-                                                        loginAttemptService,
-                                                        securityProperties.getOauth2(),
-                                                        userService,
-                                                        jwtService))
-                                        .failureHandler(
-                                                new CustomOAuth2AuthenticationFailureHandler())
-                                        // Add existing Authorities from the database
-                                        .userInfoEndpoint(
-                                                userInfoEndpoint ->
-                                                        userInfoEndpoint
-                                                                .oidcUserService(
-                                                                        new CustomOAuth2UserService(
-                                                                                securityProperties,
-                                                                                userService,
-                                                                                loginAttemptService))
-                                                                .userAuthoritiesMapper(
-                                                                        oAuth2userAuthoritiesMapper))
-                                        .permitAll());
+                        oauth2 -> {
+                            oauth2.loginPage("/login")
+                                    .successHandler(
+                                            new CustomOAuth2AuthenticationSuccessHandler(
+                                                    loginAttemptService,
+                                                    securityProperties.getOauth2(),
+                                                    userService,
+                                                    jwtService,
+                                                    licenseSettingsService))
+                                    .failureHandler(new CustomOAuth2AuthenticationFailureHandler())
+                                    // Add existing Authorities from the database
+                                    .userInfoEndpoint(
+                                            userInfoEndpoint ->
+                                                    userInfoEndpoint
+                                                            .oidcUserService(
+                                                                    new CustomOAuth2UserService(
+                                                                            securityProperties
+                                                                                    .getOauth2(),
+                                                                            userService,
+                                                                            loginAttemptService))
+                                                            .userAuthoritiesMapper(
+                                                                    oAuth2userAuthoritiesMapper))
+                                    .permitAll();
+                        });
             }
             // Handle SAML
             if (securityProperties.isSaml2Active() && runningProOrHigher) {
@@ -315,7 +323,7 @@ public class SecurityConfiguration {
                         .saml2Login(
                                 saml2 -> {
                                     try {
-                                        saml2.loginPage("/saml2")
+                                        saml2.loginPage("/login")
                                                 .relyingPartyRegistrationRepository(
                                                         saml2RelyingPartyRegistrations)
                                                 .authenticationManager(
@@ -325,7 +333,8 @@ public class SecurityConfiguration {
                                                                 loginAttemptService,
                                                                 securityProperties.getSaml2(),
                                                                 userService,
-                                                                jwtService))
+                                                                jwtService,
+                                                                licenseSettingsService))
                                                 .failureHandler(
                                                         new CustomSaml2AuthenticationFailureHandler())
                                                 .authenticationRequestResolver(

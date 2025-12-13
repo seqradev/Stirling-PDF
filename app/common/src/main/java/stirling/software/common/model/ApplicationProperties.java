@@ -112,7 +112,6 @@ public class ApplicationProperties {
     @Data
     public static class Security {
         private Boolean enableLogin;
-        private Boolean csrfDisabled;
         private InitialLogin initialLogin = new InitialLogin();
         private OAUTH2 oauth2 = new OAUTH2();
         private SAML2 saml2 = new SAML2();
@@ -121,6 +120,7 @@ public class ApplicationProperties {
         private String loginMethod = "all";
         private String customGlobalAPIKey;
         private Jwt jwt = new Jwt();
+        private Validation validation = new Validation();
 
         public Boolean isAltLogin() {
             return saml2.getEnabled() || oauth2.getEnabled();
@@ -303,10 +303,45 @@ public class ApplicationProperties {
 
         @Data
         public static class Jwt {
-            private boolean enabled = true;
-            private boolean keyCleanup = true;
+            private boolean enableKeystore = true;
+            private boolean enableKeyRotation = false;
+            private boolean enableKeyCleanup = true;
             private int keyRetentionDays = 7;
-            private Boolean secureCookie;
+        }
+
+        @Data
+        public static class Validation {
+            private Trust trust = new Trust();
+            private boolean allowAIA = false;
+            private Aatl aatl = new Aatl();
+            private Eutl eutl = new Eutl();
+            private Revocation revocation = new Revocation();
+
+            @Data
+            public static class Trust {
+                private boolean serverAsAnchor = true;
+                private boolean useSystemTrust = false;
+                private boolean useMozillaBundle = false;
+                private boolean useAATL = false;
+                private boolean useEUTL = false;
+            }
+
+            @Data
+            public static class Aatl {
+                private String url = "https://trustlist.adobe.com/tl.pdf";
+            }
+
+            @Data
+            public static class Eutl {
+                private String lotlUrl = "https://ec.europa.eu/tools/lotl/eu-lotl.xml";
+                private boolean acceptTransitional = false;
+            }
+
+            @Data
+            public static class Revocation {
+                private String mode = "none";
+                private boolean hardFail = false;
+            }
         }
     }
 
@@ -320,6 +355,8 @@ public class ApplicationProperties {
         private String tessdataDir;
         private Boolean enableAlphaFunctionality;
         private Boolean enableAnalytics;
+        private Boolean enablePosthog;
+        private Boolean enableScarf;
         private Datasource datasource;
         private Boolean disableSanitize;
         private int maxDPI;
@@ -329,9 +366,26 @@ public class ApplicationProperties {
         private String fileUploadLimit;
         private TempFileManagement tempFileManagement = new TempFileManagement();
         private DatabaseBackup databaseBackup = new DatabaseBackup();
+        private List<String> corsAllowedOrigins = new ArrayList<>();
+        private String
+                frontendUrl; // Base URL for frontend (used for invite links, etc.). If not set,
+
+        // falls back to backend URL.
 
         public boolean isAnalyticsEnabled() {
             return this.getEnableAnalytics() != null && this.getEnableAnalytics();
+        }
+
+        public boolean isPosthogEnabled() {
+            // Treat null as enabled when analytics is enabled
+            return this.isAnalyticsEnabled()
+                    && (this.getEnablePosthog() == null || this.getEnablePosthog());
+        }
+
+        public boolean isScarfEnabled() {
+            // Treat null as enabled when analytics is enabled
+            return this.isAnalyticsEnabled()
+                    && (this.getEnableScarf() == null || this.getEnableScarf());
         }
     }
 
@@ -448,23 +502,20 @@ public class ApplicationProperties {
 
     @Data
     public static class Ui {
-        private String appName;
-        private String homeDescription;
         private String appNameNavbar;
         private List<String> languages;
-
-        public String getAppName() {
-            return appName != null && !appName.trim().isEmpty() ? appName : null;
-        }
-
-        public String getHomeDescription() {
-            return homeDescription != null && !homeDescription.trim().isEmpty()
-                    ? homeDescription
-                    : null;
-        }
+        private String logoStyle = "classic"; // Options: "classic" (default) or "modern"
 
         public String getAppNameNavbar() {
             return appNameNavbar != null && !appNameNavbar.trim().isEmpty() ? appNameNavbar : null;
+        }
+
+        public String getLogoStyle() {
+            // Validate and return either "modern" or "classic"
+            if ("modern".equalsIgnoreCase(logoStyle)) {
+                return "modern";
+            }
+            return "classic"; // default
         }
     }
 
@@ -516,11 +567,23 @@ public class ApplicationProperties {
     @Data
     public static class Mail {
         private boolean enabled;
+        private boolean enableInvites = false;
+        private int inviteLinkExpiryHours = 72; // Default: 72 hours (3 days)
         private String host;
         private int port;
         private String username;
         @ToString.Exclude private String password;
         private String from;
+        // STARTTLS upgrades a plain SMTP connection to TLS after connecting (RFC 3207)
+        private Boolean startTlsEnable = true;
+        private Boolean startTlsRequired;
+        // SSL/TLS wrapper for implicit TLS (typically port 465)
+        private Boolean sslEnable;
+        // Hostnames or patterns (e.g., "smtp.example.com" or "*") to trust for TLS certificates;
+        // defaults to "*" (trust all) when not set
+        private String sslTrust;
+        // Enables hostname verification for TLS connections
+        private Boolean sslCheckServerIdentity;
     }
 
     @Data
@@ -536,7 +599,6 @@ public class ApplicationProperties {
             private boolean ssoAutoLogin;
             private boolean database;
             private CustomMetadata customMetadata = new CustomMetadata();
-            private GoogleDrive googleDrive = new GoogleDrive();
 
             @Data
             public static class CustomMetadata {
@@ -553,26 +615,6 @@ public class ApplicationProperties {
                     return producer == null || producer.trim().isEmpty()
                             ? "Stirling-PDF"
                             : producer;
-                }
-            }
-
-            @Data
-            public static class GoogleDrive {
-                private boolean enabled;
-                private String clientId;
-                private String apiKey;
-                private String appId;
-
-                public String getClientId() {
-                    return clientId == null || clientId.trim().isEmpty() ? "" : clientId;
-                }
-
-                public String getApiKey() {
-                    return apiKey == null || apiKey.trim().isEmpty() ? "" : apiKey;
-                }
-
-                public String getAppId() {
-                    return appId == null || appId.trim().isEmpty() ? "" : appId;
                 }
             }
         }

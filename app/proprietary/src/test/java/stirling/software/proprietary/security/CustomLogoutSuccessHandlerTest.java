@@ -1,6 +1,8 @@
 package stirling.software.proprietary.security;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 
@@ -38,7 +40,6 @@ class CustomLogoutSuccessHandlerTest {
 
         when(response.isCommitted()).thenReturn(false);
         when(jwtService.extractToken(request)).thenReturn(token);
-        doNothing().when(jwtService).clearToken(response);
         when(request.getContextPath()).thenReturn("");
         when(response.encodeRedirectURL(logoutPath)).thenReturn(logoutPath);
 
@@ -56,14 +57,12 @@ class CustomLogoutSuccessHandlerTest {
 
         when(response.isCommitted()).thenReturn(false);
         when(jwtService.extractToken(request)).thenReturn(token);
-        doNothing().when(jwtService).clearToken(response);
         when(request.getContextPath()).thenReturn("");
         when(response.encodeRedirectURL(logoutPath)).thenReturn(logoutPath);
 
         customLogoutSuccessHandler.onLogoutSuccess(request, response, null);
 
         verify(response).sendRedirect(logoutPath);
-        verify(jwtService).clearToken(response);
     }
 
     @Test
@@ -104,6 +103,9 @@ class CustomLogoutSuccessHandlerTest {
         when(request.getParameter("errorOAuth")).thenReturn(null);
         when(request.getParameter("oAuth2AutoCreateDisabled")).thenReturn(null);
         when(request.getParameter("oAuth2AdminBlockedUser")).thenReturn(null);
+        when(request.getParameter("oAuth2RequiresLicense")).thenReturn(null);
+        when(request.getParameter("saml2RequiresLicense")).thenReturn(null);
+        when(request.getParameter("maxUsersReached")).thenReturn(null);
         when(request.getParameter(error)).thenReturn("true");
         when(request.getScheme()).thenReturn("http");
         when(request.getServerName()).thenReturn("localhost");
@@ -209,6 +211,9 @@ class CustomLogoutSuccessHandlerTest {
         when(request.getParameter("errorOAuth")).thenReturn(null);
         when(request.getParameter("oAuth2AutoCreateDisabled")).thenReturn(null);
         when(request.getParameter("oAuth2AdminBlockedUser")).thenReturn(null);
+        when(request.getParameter("oAuth2RequiresLicense")).thenReturn(null);
+        when(request.getParameter("saml2RequiresLicense")).thenReturn(null);
+        when(request.getParameter("maxUsersReached")).thenReturn(null);
         when(request.getParameter("userIsDisabled")).thenReturn(null);
         when(request.getParameter("error")).thenReturn("!@$!@£" + error + "£$%^*$");
         when(request.getScheme()).thenReturn("http");
@@ -238,6 +243,9 @@ class CustomLogoutSuccessHandlerTest {
         when(request.getParameter("errorOAuth")).thenReturn(null);
         when(request.getParameter("oAuth2AutoCreateDisabled")).thenReturn(null);
         when(request.getParameter("oAuth2AdminBlockedUser")).thenReturn(null);
+        when(request.getParameter("oAuth2RequiresLicense")).thenReturn(null);
+        when(request.getParameter("saml2RequiresLicense")).thenReturn(null);
+        when(request.getParameter("maxUsersReached")).thenReturn(null);
         when(request.getParameter("userIsDisabled")).thenReturn(null);
         when(request.getParameter("error")).thenReturn(null);
         when(request.getParameter(error)).thenReturn("true");

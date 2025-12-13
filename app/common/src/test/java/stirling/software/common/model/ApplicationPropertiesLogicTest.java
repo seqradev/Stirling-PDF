@@ -46,10 +46,10 @@ class ApplicationPropertiesLogicTest {
         assertEquals(expectedLibre, tfm.getLibreofficeDir());
 
         tfm.setBaseTmpDir("/custom/base");
-        assertEquals("/custom/base", normalize.apply(tfm.getBaseTmpDir()));
+        assertEquals(normalize.apply("/custom/base"), normalize.apply(tfm.getBaseTmpDir()));
 
         tfm.setLibreofficeDir("/opt/libre");
-        assertEquals("/opt/libre", normalize.apply(tfm.getLibreofficeDir()));
+        assertEquals(normalize.apply("/opt/libre"), normalize.apply(tfm.getLibreofficeDir()));
     }
 
     @Test
@@ -113,37 +113,13 @@ class ApplicationPropertiesLogicTest {
     }
 
     @Test
-    void premium_google_drive_getters_return_empty_string_on_null_or_blank() {
-        Premium.ProFeatures.GoogleDrive gd = new Premium.ProFeatures.GoogleDrive();
-
-        assertEquals("", gd.getClientId());
-        assertEquals("", gd.getApiKey());
-        assertEquals("", gd.getAppId());
-
-        gd.setClientId(" id ");
-        gd.setApiKey(" key ");
-        gd.setAppId(" app ");
-        assertEquals(" id ", gd.getClientId());
-        assertEquals(" key ", gd.getApiKey());
-        assertEquals(" app ", gd.getAppId());
-    }
-
-    @Test
     void ui_getters_return_null_for_blank() {
         ApplicationProperties.Ui ui = new ApplicationProperties.Ui();
-        ui.setAppName("   ");
-        ui.setHomeDescription("");
         ui.setAppNameNavbar(null);
 
-        assertNull(ui.getAppName());
-        assertNull(ui.getHomeDescription());
         assertNull(ui.getAppNameNavbar());
 
-        ui.setAppName("Stirling-PDF");
-        ui.setHomeDescription("Home");
         ui.setAppNameNavbar("Nav");
-        assertEquals("Stirling-PDF", ui.getAppName());
-        assertEquals("Home", ui.getHomeDescription());
         assertEquals("Nav", ui.getAppNameNavbar());
     }
 
