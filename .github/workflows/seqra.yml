@@ -1,0 +1,19 @@
+name: Scan project with Seqra
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  seqra:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository
+        uses: actions/checkout@v4
+
+      - name: Upload sarif to github code security
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: seqra.sarif

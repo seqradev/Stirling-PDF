@@ -1,0 +1,2082 @@
+{
+    "$schema": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/errata01/os/schemas/sarif-schema-2.1.0.json",
+    "version": "2.1.0",
+    "runs": [
+        {
+            "originalUriBaseIds": {
+                "%SRCROOT%": {
+                    "uri": "/home/runner/work/_temp/seqra-artifacts/1f09fb0b48a88a2ac7c51fafa03f23cc98e6c994/project/sources/"
+                }
+            },
+            "tool": {
+                "driver": {
+                    "name": "Seqra",
+                    "organization": "Seqra",
+                    "rules": [
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "Cryptographic algorithms are notoriously difficult to get right. By implementing a custom message digest, you risk introducing security issues into your program. Use one of the many sound message digests already available to you: MessageDigest sha256Digest = MessageDigest.getInstance(\"SHA256\");"
+                            },
+                            "help": {
+                                "text": "Cryptographic algorithms are notoriously difficult to get right. By implementing a custom message digest, you risk introducing security issues into your program. Use one of the many sound message digests already available to you: MessageDigest sha256Digest = MessageDigest.getInstance(\"SHA256\");"
+                            },
+                            "id": "java.security.avoid-implementing-custom-digests",
+                            "name": "java.security.avoid-implementing-custom-digests",
+                            "properties": {
+                                "tags": [
+                                    "CWE-327"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.avoid-implementing-custom-digests"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "When a Restful webservice endpoint is configured to use wildcard mediaType {*/*} as a value for the @Consumes annotation, an attacker could abuse the SerializableProvider by sending a HTTP Request with a Content-Type of application/x-java-serialized-object. The body of that request would be processed by the SerializationProvider and could contain a malicious payload, which may lead to arbitrary code execution when calling the $Y.getObject method."
+                            },
+                            "help": {
+                                "text": "When a Restful webservice endpoint is configured to use wildcard mediaType {*/*} as a value for the @Consumes annotation, an attacker could abuse the SerializableProvider by sending a HTTP Request with a Content-Type of application/x-java-serialized-object. The body of that request would be processed by the SerializationProvider and could contain a malicious payload, which may lead to arbitrary code execution when calling the $Y.getObject method."
+                            },
+                            "id": "java.security.insecure-resteasy-deserialization",
+                            "name": "java.security.insecure-resteasy-deserialization",
+                            "properties": {
+                                "tags": [
+                                    "CWE-502"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.insecure-resteasy-deserialization"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "The application was found setting file permissions to overly permissive values. Consider\nusing the following values if the application user is the only process to access\nthe file:\n\n- `r--` - read only access to the file\n- `w--` - write only access to the file\n- `rw-` - read/write access to the file\n"
+                            },
+                            "help": {
+                                "text": "The application was found setting file permissions to overly permissive values. Consider\nusing the following values if the application user is the only process to access\nthe file:\n\n- `r--` - read only access to the file\n- `w--` - write only access to the file\n- `rw-` - read/write access to the file\n"
+                            },
+                            "id": "java.security.overly-permissive-file-permission-inline",
+                            "name": "java.security.overly-permissive-file-permission-inline",
+                            "properties": {
+                                "tags": [
+                                    "CWE-732"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.overly-permissive-file-permission-inline"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "GCM IV/nonce is reused, encryption can be totally useless"
+                            },
+                            "help": {
+                                "text": "GCM IV/nonce is reused, encryption can be totally useless"
+                            },
+                            "id": "java.security.gcm-nonce-reuse",
+                            "name": "java.security.gcm-nonce-reuse",
+                            "properties": {
+                                "tags": [
+                                    "CWE-323"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.gcm-nonce-reuse"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "Use of RC2 was detected. RC2 is vulnerable to related-key attacks, and is therefore considered non-compliant. Instead, use a strong, secure cipher: Cipher.getInstance(\"AES/CBC/PKCS7PADDING\")."
+                            },
+                            "help": {
+                                "text": "Use of RC2 was detected. RC2 is vulnerable to related-key attacks, and is therefore considered non-compliant. Instead, use a strong, secure cipher: Cipher.getInstance(\"AES/CBC/PKCS7PADDING\")."
+                            },
+                            "id": "java.security.use-of-rc2",
+                            "name": "java.security.use-of-rc2",
+                            "properties": {
+                                "tags": [
+                                    "CWE-327"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.use-of-rc2"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "Use of RC4 was detected. RC4 is vulnerable to several attacks, including stream cipher attacks and bit flipping attacks. Instead, use a strong, secure cipher: Cipher.getInstance(\"AES/CBC/PKCS7PADDING\")."
+                            },
+                            "help": {
+                                "text": "Use of RC4 was detected. RC4 is vulnerable to several attacks, including stream cipher attacks and bit flipping attacks. Instead, use a strong, secure cipher: Cipher.getInstance(\"AES/CBC/PKCS7PADDING\")."
+                            },
+                            "id": "java.security.use-of-rc4",
+                            "name": "java.security.use-of-rc4",
+                            "properties": {
+                                "tags": [
+                                    "CWE-327"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.use-of-rc4"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "CSRF protection is disabled for this configuration. This is a security risk."
+                            },
+                            "help": {
+                                "text": "CSRF protection is disabled for this configuration. This is a security risk."
+                            },
+                            "id": "java.security.csrf-disabled-in-spring-app",
+                            "name": "java.security.csrf-disabled-in-spring-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-352"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.csrf-disabled-in-spring-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "Detected the decoding of a JWT token without a verify step. JWT tokens must be verified before use, otherwise the token's integrity is unknown. This means a malicious actor could forge a JWT token with any claims. Call '.verify()' before using the token."
+                            },
+                            "help": {
+                                "text": "Detected the decoding of a JWT token without a verify step. JWT tokens must be verified before use, otherwise the token's integrity is unknown. This means a malicious actor could forge a JWT token with any claims. Call '.verify()' before using the token."
+                            },
+                            "id": "java.security.java-jwt-decode-without-verify",
+                            "name": "java.security.java-jwt-decode-without-verify",
+                            "properties": {
+                                "tags": [
+                                    "CWE-345"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.java-jwt-decode-without-verify"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "The application was found to permit the `RuntimePermission` of `createClassLoader`, `ReflectPermission` of `suppressAccessChecks`, or both.\nBy granting the `RuntimePermission` of `createClassLoader`, a compromised application could instantiate their own class loaders and load arbitrary classes.\nBy granting the `ReflectPermission` of `suppressAccessChecks` an application will no longer check Java language access checks on fields and methods of a class. This will effectively grant access to protected and private members."
+                            },
+                            "help": {
+                                "text": "The application was found to permit the `RuntimePermission` of `createClassLoader`, `ReflectPermission` of `suppressAccessChecks`, or both.\nBy granting the `RuntimePermission` of `createClassLoader`, a compromised application could instantiate their own class loaders and load arbitrary classes.\nBy granting the `ReflectPermission` of `suppressAccessChecks` an application will no longer check Java language access checks on fields and methods of a class. This will effectively grant access to protected and private members."
+                            },
+                            "id": "java.security.dangerous-permissions",
+                            "name": "java.security.dangerous-permissions",
+                            "properties": {
+                                "tags": [
+                                    "CWE-732"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.dangerous-permissions"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "Detected SHA1 hash algorithm which is considered insecure. SHA1 is not collision resistant and is therefore not suitable as a cryptographic signature. Instead, use PBKDF2 for password hashing or SHA256 or SHA512 for other hash function applications."
+                            },
+                            "help": {
+                                "text": "Detected SHA1 hash algorithm which is considered insecure. SHA1 is not collision resistant and is therefore not suitable as a cryptographic signature. Instead, use PBKDF2 for password hashing or SHA256 or SHA512 for other hash function applications."
+                            },
+                            "id": "java.security.use-of-sha1",
+                            "name": "java.security.use-of-sha1",
+                            "properties": {
+                                "tags": [
+                                    "CWE-328"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.use-of-sha1"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "A potential hard-coded password was identified in a database connection string. Passwords should not be stored directly in code but loaded from secure vault."
+                            },
+                            "help": {
+                                "text": "A potential hard-coded password was identified in a database connection string. Passwords should not be stored directly in code but loaded from secure vault."
+                            },
+                            "id": "java.security.constant-db-password",
+                            "name": "java.security.constant-db-password",
+                            "properties": {
+                                "tags": [
+                                    "CWE-259"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.constant-db-password"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "'Integer.toHexString()' strips leading zeroes from each byte if read byte-by-byte. This mistake weakens the hash value computed since it introduces more collisions. Use 'String.format(\"%02X\", ...)' instead."
+                            },
+                            "help": {
+                                "text": "'Integer.toHexString()' strips leading zeroes from each byte if read byte-by-byte. This mistake weakens the hash value computed since it introduces more collisions. Use 'String.format(\"%02X\", ...)' instead."
+                            },
+                            "id": "java.security.bad-hexa-conversion",
+                            "name": "java.security.bad-hexa-conversion",
+                            "properties": {
+                                "tags": [
+                                    "CWE-704"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.bad-hexa-conversion"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Using an arbitrary object ('$PARAMTYPE $PARAM') with Java RMI is an insecure deserialization vulnerability. This object can be manipulated by a malicious actor allowing them to execute code on your system. Instead, use an integer ID to look up your object, or consider alternative serialization schemes such as JSON."
+                            },
+                            "help": {
+                                "text": "Using an arbitrary object ('$PARAMTYPE $PARAM') with Java RMI is an insecure deserialization vulnerability. This object can be manipulated by a malicious actor allowing them to execute code on your system. Instead, use an integer ID to look up your object, or consider alternative serialization schemes such as JSON."
+                            },
+                            "id": "java.security.server-dangerous-object-deserialization",
+                            "name": "java.security.server-dangerous-object-deserialization",
+                            "properties": {
+                                "tags": [
+                                    "CWE-502"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.server-dangerous-object-deserialization"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "URL rewriting has significant security risks. Since session ID appears in the URL, it may be easily seen by third parties."
+                            },
+                            "help": {
+                                "text": "URL rewriting has significant security risks. Since session ID appears in the URL, it may be easily seen by third parties."
+                            },
+                            "id": "java.security.url-rewriting",
+                            "name": "java.security.url-rewriting",
+                            "properties": {
+                                "tags": [
+                                    "CWE-200"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.url-rewriting"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "The application does not provide authentication when communicating a database server. It is strongly recommended that the database server be configured with authentication and restrict what queries users can execute."
+                            },
+                            "help": {
+                                "text": "The application does not provide authentication when communicating a database server. It is strongly recommended that the database server be configured with authentication and restrict what queries users can execute."
+                            },
+                            "id": "java.security.java-empty-db-password",
+                            "name": "java.security.java-empty-db-password",
+                            "properties": {
+                                "tags": [
+                                    "CWE-306"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.java-empty-db-password"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "Use of Blowfish was detected. Blowfish uses a 64-bit block size that makes it vulnerable to birthday attacks, and is therefore considered non-compliant. Instead, use a strong, secure cipher: Cipher.getInstance(\"AES/CBC/PKCS7PADDING\")."
+                            },
+                            "help": {
+                                "text": "Use of Blowfish was detected. Blowfish uses a 64-bit block size that makes it vulnerable to birthday attacks, and is therefore considered non-compliant. Instead, use a strong, secure cipher: Cipher.getInstance(\"AES/CBC/PKCS7PADDING\")."
+                            },
+                            "id": "java.security.use-of-blowfish",
+                            "name": "java.security.use-of-blowfish",
+                            "properties": {
+                                "tags": [
+                                    "CWE-327"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.use-of-blowfish"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "JMS Object messages depend on Java Serialization for marshalling/unmarshalling of the message payload when ObjectMessage.getObject() is called. Deserialization of untrusted data can lead to security flaws; a remote attacker could via a crafted JMS ObjectMessage to execute arbitrary code with the permissions of the application listening/consuming JMS Messages. In this case, the JMS MessageListener consume an ObjectMessage type received inside the onMessage method, which may lead to arbitrary code execution when calling the $Y.getObject method."
+                            },
+                            "help": {
+                                "text": "JMS Object messages depend on Java Serialization for marshalling/unmarshalling of the message payload when ObjectMessage.getObject() is called. Deserialization of untrusted data can lead to security flaws; a remote attacker could via a crafted JMS ObjectMessage to execute arbitrary code with the permissions of the application listening/consuming JMS Messages. In this case, the JMS MessageListener consume an ObjectMessage type received inside the onMessage method, which may lead to arbitrary code execution when calling the $Y.getObject method."
+                            },
+                            "id": "java.security.insecure-jms-deserialization",
+                            "name": "java.security.insecure-jms-deserialization",
+                            "properties": {
+                                "tags": [
+                                    "CWE-502"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.insecure-jms-deserialization"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "The application does not provide authentication when communicating an LDAP server. It is strongly recommended that the LDAP server be configured with authentication and restrict what queries users can execute."
+                            },
+                            "help": {
+                                "text": "The application does not provide authentication when communicating an LDAP server. It is strongly recommended that the LDAP server be configured with authentication and restrict what queries users can execute."
+                            },
+                            "id": "java.security.java-anonymous-ldap",
+                            "name": "java.security.java-anonymous-ldap",
+                            "properties": {
+                                "tags": [
+                                    "CWE-306"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.java-anonymous-ldap"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "Detected MD5 hash algorithm which is considered insecure. MD5 is not collision resistant and is therefore not suitable as a cryptographic signature. Use HMAC instead."
+                            },
+                            "help": {
+                                "text": "Detected MD5 hash algorithm which is considered insecure. MD5 is not collision resistant and is therefore not suitable as a cryptographic signature. Use HMAC instead."
+                            },
+                            "id": "java.security.use-of-md5",
+                            "name": "java.security.use-of-md5",
+                            "properties": {
+                                "tags": [
+                                    "CWE-328"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.use-of-md5"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "Use of AES with no settings detected. By default, java.crypto.Cipher uses ECB mode. ECB doesn't provide message confidentiality and is not semantically secure so should not be used. Instead, use a strong, secure cipher: java.crypto.Cipher.getInstance(\"AES/CBC/PKCS7PADDING\")."
+                            },
+                            "help": {
+                                "text": "Use of AES with no settings detected. By default, java.crypto.Cipher uses ECB mode. ECB doesn't provide message confidentiality and is not semantically secure so should not be used. Instead, use a strong, secure cipher: java.crypto.Cipher.getInstance(\"AES/CBC/PKCS7PADDING\")."
+                            },
+                            "id": "java.security.use-of-default-aes",
+                            "name": "java.security.use-of-default-aes",
+                            "properties": {
+                                "tags": [
+                                    "CWE-327"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.use-of-default-aes"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Detected use of the 'none' algorithm in a JWT token. The 'none' algorithm assumes the integrity of the token has already been verified. This would allow a malicious actor to forge a JWT token that will automatically be verified. Do not explicitly use the 'none' algorithm."
+                            },
+                            "help": {
+                                "text": "Detected use of the 'none' algorithm in a JWT token. The 'none' algorithm assumes the integrity of the token has already been verified. This would allow a malicious actor to forge a JWT token that will automatically be verified. Do not explicitly use the 'none' algorithm."
+                            },
+                            "id": "java.security.jjwt-none-alg",
+                            "name": "java.security.jjwt-none-alg",
+                            "properties": {
+                                "tags": [
+                                    "CWE-327"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.jjwt-none-alg"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "The application was found matching a variable during a regular expression pattern match, and then calling a Unicode normalize function after validation has occurred. This is usually indicative of a poor input validation strategy as an adversary may attempt to exploit the normalization process."
+                            },
+                            "help": {
+                                "text": "The application was found matching a variable during a regular expression pattern match, and then calling a Unicode normalize function after validation has occurred. This is usually indicative of a poor input validation strategy as an adversary may attempt to exploit the normalization process."
+                            },
+                            "id": "java.security.string-normalize-after-validation",
+                            "name": "java.security.string-normalize-after-validation",
+                            "properties": {
+                                "tags": [
+                                    "CWE-180"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.string-normalize-after-validation"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "'HS256' algorithm can be bruteforced, and thus is considered insecure in a JWT token."
+                            },
+                            "help": {
+                                "text": "'HS256' algorithm can be bruteforced, and thus is considered insecure in a JWT token."
+                            },
+                            "id": "java.security.jjwt-hs256",
+                            "name": "java.security.jjwt-hs256",
+                            "properties": {
+                                "tags": [
+                                    "CWE-327"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.jjwt-hs256"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "Enabling extensions in Apache XML RPC server or client can lead to deserialization\nvulnerability which would allow an attacker to execute arbitrary code.\n"
+                            },
+                            "help": {
+                                "text": "Enabling extensions in Apache XML RPC server or client can lead to deserialization\nvulnerability which would allow an attacker to execute arbitrary code.\n"
+                            },
+                            "id": "java.security.apache-rpc-enabled-extensions",
+                            "name": "java.security.apache-rpc-enabled-extensions",
+                            "properties": {
+                                "tags": [
+                                    "CWE-502"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.apache-rpc-enabled-extensions"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "The application is disabling Wicket's string escaping functionality by calling `setEscapeModelStrings(false)`.\nThis could lead to Cross Site Scripting (XSS) if used with user-supplied input. XSS is an\nattack which exploits a web application or system to treat user input\nas markup or script code. It is important to encode the data depending on the specific context\nit is used in. There are at least six context types:\n\n- Inside HTML tags `<div>context 1</div>`\n- Inside attributes: `<div class=\"context 2\"></div>`\n- Inside event attributes `<button onclick=\"context 3\">button</button>`\n- Inside script blocks: `<script>var x = \"context 4\"</script>`\n- Unsafe element HTML assignment: `element.innerHTML = \"context 5\"`\n- Inside URLs: `<iframe src=\"context 6\"></iframe><a href=\"context 6\">link</a>`\n\nScript blocks alone have multiple ways they need to be encoded. Extra care must be taken if\nuser input is ever output inside of script tags.\n\nUser input that is displayed within the application must be encoded, sanitized or validated\nto ensure it cannot be treated as HTML or executed as JavaScript code. Care must also be\ntaken to not mix server-side templating with client-side templating, as the server-side templating\nwill not encode things like {{ 7*7 }} which may execute client-side templating features.\n\nIt is _NOT_ advised to encode user input prior to inserting into a data store. The data will\nneed to be encoded depending on context of where it is output. It is much safer to force the displaying\nsystem to handle the encoding and not attempt to guess how it should be encoded.\n\nUse Wicket's built in escaping feature by calling `Component.setEscapeModelStrings(true);`\n"
+                            },
+                            "help": {
+                                "text": "The application is disabling Wicket's string escaping functionality by calling `setEscapeModelStrings(false)`.\nThis could lead to Cross Site Scripting (XSS) if used with user-supplied input. XSS is an\nattack which exploits a web application or system to treat user input\nas markup or script code. It is important to encode the data depending on the specific context\nit is used in. There are at least six context types:\n\n- Inside HTML tags `<div>context 1</div>`\n- Inside attributes: `<div class=\"context 2\"></div>`\n- Inside event attributes `<button onclick=\"context 3\">button</button>`\n- Inside script blocks: `<script>var x = \"context 4\"</script>`\n- Unsafe element HTML assignment: `element.innerHTML = \"context 5\"`\n- Inside URLs: `<iframe src=\"context 6\"></iframe><a href=\"context 6\">link</a>`\n\nScript blocks alone have multiple ways they need to be encoded. Extra care must be taken if\nuser input is ever output inside of script tags.\n\nUser input that is displayed within the application must be encoded, sanitized or validated\nto ensure it cannot be treated as HTML or executed as JavaScript code. Care must also be\ntaken to not mix server-side templating with client-side templating, as the server-side templating\nwill not encode things like {{ 7*7 }} which may execute client-side templating features.\n\nIt is _NOT_ advised to encode user input prior to inserting into a data store. The data will\nneed to be encoded depending on context of where it is output. It is much safer to force the displaying\nsystem to handle the encoding and not attempt to guess how it should be encoded.\n\nUse Wicket's built in escaping feature by calling `Component.setEscapeModelStrings(true);`\n"
+                            },
+                            "id": "java.security.wicket-xss",
+                            "name": "java.security.wicket-xss",
+                            "properties": {
+                                "tags": [
+                                    "CWE-79"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.wicket-xss"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "A potential hard-coded password was identified in a hard-coded string.\nPasswords should not be stored directly in code but loaded from secure vault.\n"
+                            },
+                            "help": {
+                                "text": "A potential hard-coded password was identified in a hard-coded string.\nPasswords should not be stored directly in code but loaded from secure vault.\n"
+                            },
+                            "id": "java.security.hardcoded-password",
+                            "name": "java.security.hardcoded-password",
+                            "properties": {
+                                "tags": [
+                                    "CWE-259"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.hardcoded-password"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "Triple DES (3DES or DESede) is considered deprecated. AES is the recommended cipher. Upgrade to use AES."
+                            },
+                            "help": {
+                                "text": "Triple DES (3DES or DESede) is considered deprecated. AES is the recommended cipher. Upgrade to use AES."
+                            },
+                            "id": "java.security.desede-is-deprecated",
+                            "name": "java.security.desede-is-deprecated",
+                            "properties": {
+                                "tags": [
+                                    "CWE-326"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.desede-is-deprecated"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "SAML parses attestations as an XML document. By processing XML comments, comment fields can end up modifying the interpretation of input fields. This could allow an adversary to insert an XML comment to break up the attestation's username or other fields, allowing an attacker to bypass authorization or authentication checks."
+                            },
+                            "help": {
+                                "text": "SAML parses attestations as an XML document. By processing XML comments, comment fields can end up modifying the interpretation of input fields. This could allow an adversary to insert an XML comment to break up the attestation's username or other fields, allowing an attacker to bypass authorization or authentication checks."
+                            },
+                            "id": "java.security.java-saml-ignore-comments",
+                            "name": "java.security.java-saml-ignore-comments",
+                            "properties": {
+                                "tags": [
+                                    "CWE-1390"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.java-saml-ignore-comments"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "An object-returning LDAP search will allow attackers to control the LDAP response. This could lead to Remote Code Execution."
+                            },
+                            "help": {
+                                "text": "An object-returning LDAP search will allow attackers to control the LDAP response. This could lead to Remote Code Execution."
+                            },
+                            "id": "java.security.ldap-entry-poisoning",
+                            "name": "java.security.ldap-entry-poisoning",
+                            "properties": {
+                                "tags": [
+                                    "CWE-90"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.ldap-entry-poisoning"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "NullCipher was detected. This will not encrypt anything; the cipher text will be the same as the plain text. Use a valid, secure cipher: Cipher.getInstance(\"AES/CBC/PKCS7PADDING\")."
+                            },
+                            "help": {
+                                "text": "NullCipher was detected. This will not encrypt anything; the cipher text will be the same as the plain text. Use a valid, secure cipher: Cipher.getInstance(\"AES/CBC/PKCS7PADDING\")."
+                            },
+                            "id": "java.security.no-null-cipher",
+                            "name": "java.security.no-null-cipher",
+                            "properties": {
+                                "tags": [
+                                    "CWE-327"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.no-null-cipher"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "A cookie was detected without setting the 'HttpOnly' flag. The 'HttpOnly' flag for cookies instructs the browser to forbid client-side scripts from reading the cookie. Set the 'HttpOnly' flag by calling 'cookie.setHttpOnly(true);'"
+                            },
+                            "help": {
+                                "text": "A cookie was detected without setting the 'HttpOnly' flag. The 'HttpOnly' flag for cookies instructs the browser to forbid client-side scripts from reading the cookie. Set the 'HttpOnly' flag by calling 'cookie.setHttpOnly(true);'"
+                            },
+                            "id": "java.security.cookie-missing-httponly",
+                            "name": "java.security.cookie-missing-httponly",
+                            "properties": {
+                                "tags": [
+                                    "CWE-1004"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.cookie-missing-httponly"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "Using CBC with PKCS5Padding is susceptible to padding oracle attacks. A malicious actor could discern the difference between plaintext with valid or invalid padding. Further, CBC mode does not include any integrity checks. Use 'AES/GCM/NoPadding' instead."
+                            },
+                            "help": {
+                                "text": "Using CBC with PKCS5Padding is susceptible to padding oracle attacks. A malicious actor could discern the difference between plaintext with valid or invalid padding. Further, CBC mode does not include any integrity checks. Use 'AES/GCM/NoPadding' instead."
+                            },
+                            "id": "java.security.cbc-padding-oracle",
+                            "name": "java.security.cbc-padding-oracle",
+                            "properties": {
+                                "tags": [
+                                    "CWE-327"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.cbc-padding-oracle"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "DES is considered deprecated. AES is the recommended cipher. Upgrade to use AES."
+                            },
+                            "help": {
+                                "text": "DES is considered deprecated. AES is the recommended cipher. Upgrade to use AES."
+                            },
+                            "id": "java.security.des-is-deprecated",
+                            "name": "java.security.des-is-deprecated",
+                            "properties": {
+                                "tags": [
+                                    "CWE-326"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.des-is-deprecated"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "The application was found printing stack information to the default system output. As stack trace data may contain sensitive information, it is recommended that the output be logged using a secure logging framework. Log files should also be protected with proper operating system permission levels."
+                            },
+                            "help": {
+                                "text": "The application was found printing stack information to the default system output. As stack trace data may contain sensitive information, it is recommended that the output be logged using a secure logging framework. Log files should also be protected with proper operating system permission levels."
+                            },
+                            "id": "java.security.stacktrace-printing-in-error-message",
+                            "name": "java.security.stacktrace-printing-in-error-message",
+                            "properties": {
+                                "tags": [
+                                    "CWE-209"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.stacktrace-printing-in-error-message"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Detected use of the 'none' algorithm in a JWT token. The 'none' algorithm assumes the integrity of the token has already been verified. This would allow a malicious actor to forge a JWT token that will automatically be verified. Do not explicitly use the 'none' algorithm. Instead, use an algorithm such as 'HS256'."
+                            },
+                            "help": {
+                                "text": "Detected use of the 'none' algorithm in a JWT token. The 'none' algorithm assumes the integrity of the token has already been verified. This would allow a malicious actor to forge a JWT token that will automatically be verified. Do not explicitly use the 'none' algorithm. Instead, use an algorithm such as 'HS256'."
+                            },
+                            "id": "java.security.jwt-none-alg",
+                            "name": "java.security.jwt-none-alg",
+                            "properties": {
+                                "tags": [
+                                    "CWE-327"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.jwt-none-alg"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "Hardcoded encryption key makes AES symmetric encryption useless. An attacker can easily reverse engineer the application and recover the keys."
+                            },
+                            "help": {
+                                "text": "Hardcoded encryption key makes AES symmetric encryption useless. An attacker can easily reverse engineer the application and recover the keys."
+                            },
+                            "id": "java.security.aes-hardcoded-key",
+                            "name": "java.security.aes-hardcoded-key",
+                            "properties": {
+                                "tags": [
+                                    "CWE-321"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.aes-hardcoded-key"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "Permissive CORS policy will allow a malicious application to communicate with the victim application in an inappropriate way, leading to spoofing, data theft, relay and other attacks."
+                            },
+                            "help": {
+                                "text": "Permissive CORS policy will allow a malicious application to communicate with the victim application in an inappropriate way, leading to spoofing, data theft, relay and other attacks."
+                            },
+                            "id": "java.security.permissive-cors",
+                            "name": "java.security.permissive-cors",
+                            "properties": {
+                                "tags": [
+                                    "CWE-183"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.permissive-cors"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "Cryptographic implementations with insufficient key length is susceptible to bruteforce attacks."
+                            },
+                            "help": {
+                                "text": "Cryptographic implementations with insufficient key length is susceptible to bruteforce attacks."
+                            },
+                            "id": "java.security.weak-ec-key-size",
+                            "name": "java.security.weak-ec-key-size",
+                            "properties": {
+                                "tags": [
+                                    "CWE-326"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.weak-ec-key-size"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "Using RSA without OAEP mode weakens the encryption."
+                            },
+                            "help": {
+                                "text": "Using RSA without OAEP mode weakens the encryption."
+                            },
+                            "id": "java.security.rsa-no-padding",
+                            "name": "java.security.rsa-no-padding",
+                            "properties": {
+                                "tags": [
+                                    "CWE-326"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.rsa-no-padding"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "Default session middleware settings: `setSecure` not set to true. This ensures that the cookie is sent only over HTTPS to prevent cross-site scripting attacks."
+                            },
+                            "help": {
+                                "text": "Default session middleware settings: `setSecure` not set to true. This ensures that the cookie is sent only over HTTPS to prevent cross-site scripting attacks."
+                            },
+                            "id": "java.security.cookie-issecure-false",
+                            "name": "java.security.cookie-issecure-false",
+                            "properties": {
+                                "tags": []
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.cookie-issecure-false"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "Found MongoDB client with SSL hostname verification disabled"
+                            },
+                            "help": {
+                                "text": "Found MongoDB client with SSL hostname verification disabled"
+                            },
+                            "id": "java.security.mongo-hostname-verification-disabled",
+                            "name": "java.security.mongo-hostname-verification-disabled",
+                            "properties": {
+                                "tags": [
+                                    "CWE-295"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.mongo-hostname-verification-disabled"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "DefaultHttpClient is deprecated. Further, it does not support connections using TLS1.2, which makes using DefaultHttpClient a security hazard. Use HttpClientBuilder instead."
+                            },
+                            "help": {
+                                "text": "DefaultHttpClient is deprecated. Further, it does not support connections using TLS1.2, which makes using DefaultHttpClient a security hazard. Use HttpClientBuilder instead."
+                            },
+                            "id": "java.security.defaulthttpclient-is-deprecated",
+                            "name": "java.security.defaulthttpclient-is-deprecated",
+                            "properties": {
+                                "tags": [
+                                    "CWE-326"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.defaulthttpclient-is-deprecated"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "Detected a method annotated with 'RequestMapping' that does not specify the HTTP method. CSRF protections are not enabled for GET, HEAD, TRACE, or OPTIONS, and by default all HTTP methods are allowed when the HTTP method is not explicitly specified. This means that a method that performs state changes could be vulnerable to CSRF attacks. To mitigate, add the 'method' field and specify the HTTP method (such as 'RequestMethod.POST')."
+                            },
+                            "help": {
+                                "text": "Detected a method annotated with 'RequestMapping' that does not specify the HTTP method. CSRF protections are not enabled for GET, HEAD, TRACE, or OPTIONS, and by default all HTTP methods are allowed when the HTTP method is not explicitly specified. This means that a method that performs state changes could be vulnerable to CSRF attacks. To mitigate, add the 'method' field and specify the HTTP method (such as 'RequestMethod.POST')."
+                            },
+                            "id": "java.security.unrestricted-request-mapping",
+                            "name": "java.security.unrestricted-request-mapping",
+                            "properties": {
+                                "tags": [
+                                    "CWE-352"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.unrestricted-request-mapping"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "Cipher in ECB mode is detected. ECB mode produces the same output for the same input each time which allows an attacker to intercept and replay the data. Further, ECB mode does not provide any integrity checking."
+                            },
+                            "help": {
+                                "text": "Cipher in ECB mode is detected. ECB mode produces the same output for the same input each time which allows an attacker to intercept and replay the data. Further, ECB mode does not provide any integrity checking."
+                            },
+                            "id": "java.security.ecb-cipher",
+                            "name": "java.security.ecb-cipher",
+                            "properties": {
+                                "tags": [
+                                    "CWE-327"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.ecb-cipher"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "The network communications for Hazelcast is configured to use a deprecated symmetric cipher. Consider using TLS/SSL when establishing communications across the Hazelcast cluster."
+                            },
+                            "help": {
+                                "text": "The network communications for Hazelcast is configured to use a deprecated symmetric cipher. Consider using TLS/SSL when establishing communications across the Hazelcast cluster."
+                            },
+                            "id": "java.security.hazelcast-symmetric-encryption",
+                            "name": "java.security.hazelcast-symmetric-encryption",
+                            "properties": {
+                                "tags": [
+                                    "CWE-326"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.hazelcast-symmetric-encryption"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module)."
+                            },
+                            "help": {
+                                "text": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module)."
+                            },
+                            "id": "java.security.jwt-hardcoded-secret",
+                            "name": "java.security.jwt-hardcoded-secret",
+                            "properties": {
+                                "tags": [
+                                    "CWE-798"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.jwt-hardcoded-secret"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "When a Restful webservice endpoint isn't configured with a @Consumes annotation, an attacker could abuse the SerializableProvider by sending a HTTP Request with a Content-Type of application/x-java-serialized-object. The body of that request would be processed by the SerializationProvider and could contain a malicious payload, which may lead to arbitrary code execution. Instead, add a @Consumes annotation to the function or class."
+                            },
+                            "help": {
+                                "text": "When a Restful webservice endpoint isn't configured with a @Consumes annotation, an attacker could abuse the SerializableProvider by sending a HTTP Request with a Content-Type of application/x-java-serialized-object. The body of that request would be processed by the SerializationProvider and could contain a malicious payload, which may lead to arbitrary code execution. Instead, add a @Consumes annotation to the function or class."
+                            },
+                            "id": "java.security.default-resteasy-provider-abuse",
+                            "name": "java.security.default-resteasy-provider-abuse",
+                            "properties": {
+                                "tags": [
+                                    "CWE-502"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.default-resteasy-provider-abuse"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "If an attacker can supply values that the application then uses to determine which class to instantiate or which method to invoke, the potential exists for the attacker to create control flow paths through the application that were not intended by the application developers. This attack vector may allow the attacker to bypass authentication or access control checks or otherwise cause the application to behave in an unexpected manner."
+                            },
+                            "help": {
+                                "text": "If an attacker can supply values that the application then uses to determine which class to instantiate or which method to invoke, the potential exists for the attacker to create control flow paths through the application that were not intended by the application developers. This attack vector may allow the attacker to bypass authentication or access control checks or otherwise cause the application to behave in an unexpected manner."
+                            },
+                            "id": "java.security.unsafe-reflection-in-servlet-app",
+                            "name": "java.security.unsafe-reflection-in-servlet-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-470"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.unsafe-reflection-in-servlet-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "The application allows user input to control format string parameters. By passing invalid format string specifiers an adversary could cause the application to throw exceptions or possibly leak internal information depending on application logic."
+                            },
+                            "help": {
+                                "text": "The application allows user input to control format string parameters. By passing invalid format string specifiers an adversary could cause the application to throw exceptions or possibly leak internal information depending on application logic."
+                            },
+                            "id": "java.security.format-string-external-manipulation-in-spring-app",
+                            "name": "java.security.format-string-external-manipulation-in-spring-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-134"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.format-string-external-manipulation-in-spring-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "Older Java application servers are vulnerable to HTTP response splitting, which may occur if an HTTP request can be injected with CRLF characters."
+                            },
+                            "help": {
+                                "text": "Older Java application servers are vulnerable to HTTP response splitting, which may occur if an HTTP request can be injected with CRLF characters."
+                            },
+                            "id": "java.security.http-response-splitting-in-servlet-app",
+                            "name": "java.security.http-response-splitting-in-servlet-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-113"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.http-response-splitting-in-servlet-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential template injection: unvalidated user data flows into template engine\n"
+                            },
+                            "help": {
+                                "text": "Potential template injection: unvalidated user data flows into template engine\n"
+                            },
+                            "id": "java.security.ssti-in-spring-app",
+                            "name": "java.security.ssti-in-spring-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-94",
+                                    "CWE-1336"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.ssti-in-spring-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "An attacker can set arbitrary bean properties that can compromise system integrity. An attacker can leverage this functionality to access special bean properties like class.classLoader that will allow them to override system properties and potentially execute arbitrary code."
+                            },
+                            "help": {
+                                "text": "An attacker can set arbitrary bean properties that can compromise system integrity. An attacker can leverage this functionality to access special bean properties like class.classLoader that will allow them to override system properties and potentially execute arbitrary code."
+                            },
+                            "id": "java.security.bean-injection",
+                            "name": "java.security.bean-injection",
+                            "properties": {
+                                "tags": [
+                                    "CWE-15"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.bean-injection"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential code injection: Groovy invocation with user-controlled input."
+                            },
+                            "help": {
+                                "text": "Potential code injection: Groovy invocation with user-controlled input."
+                            },
+                            "id": "java.security.groovy-injection-in-servlet-app",
+                            "name": "java.security.groovy-injection-in-servlet-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-94"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.groovy-injection-in-servlet-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential code injection: calling Spring Expression Language method directly with user-supplied input may allow an adversary to  read or modify sensitive data, bypass security checks, or, in severe cases, execute arbitrary code within the application's context."
+                            },
+                            "help": {
+                                "text": "Potential code injection: calling Spring Expression Language method directly with user-supplied input may allow an adversary to  read or modify sensitive data, bypass security checks, or, in severe cases, execute arbitrary code within the application's context."
+                            },
+                            "id": "java.security.spring-el-injection",
+                            "name": "java.security.spring-el-injection",
+                            "properties": {
+                                "tags": [
+                                    "CWE-917"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.spring-el-injection"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "The `HttpRequest.getRequestDispatcher()`'s `include` and `forward` methods will return any file that is resolvable within the web application context. This includes the `web.xml` file, any compiled classes, `jsp` files, and additional JAR or WAR libraries that are accessible."
+                            },
+                            "help": {
+                                "text": "The `HttpRequest.getRequestDispatcher()`'s `include` and `forward` methods will return any file that is resolvable within the web application context. This includes the `web.xml` file, any compiled classes, `jsp` files, and additional JAR or WAR libraries that are accessible."
+                            },
+                            "id": "java.security.file-disclosure-request-dispatcher",
+                            "name": "java.security.file-disclosure-request-dispatcher",
+                            "properties": {
+                                "tags": [
+                                    "CWE-552"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.file-disclosure-request-dispatcher"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential XPath injection: detected input from a HTTPServletRequest going into a XPath evaluate or compile command."
+                            },
+                            "help": {
+                                "text": "Potential XPath injection: detected input from a HTTPServletRequest going into a XPath evaluate or compile command."
+                            },
+                            "id": "java.security.xpath-injection-in-servlet-app",
+                            "name": "java.security.xpath-injection-in-servlet-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-643"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.xpath-injection-in-servlet-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "Application redirects to a destination URL specified by a user-supplied parameter that is not validated. This could direct users to malicious locations. Consider using an allowlist to validate URLs."
+                            },
+                            "help": {
+                                "text": "Application redirects to a destination URL specified by a user-supplied parameter that is not validated. This could direct users to malicious locations. Consider using an allowlist to validate URLs."
+                            },
+                            "id": "java.security.unvalidated-redirect-in-servlet-app",
+                            "name": "java.security.unvalidated-redirect-in-servlet-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-601"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.unvalidated-redirect-in-servlet-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential XXE: untrusted input is parsed as an XML with safety flags disabled"
+                            },
+                            "help": {
+                                "text": "Potential XXE: untrusted input is parsed as an XML with safety flags disabled"
+                            },
+                            "id": "java.security.xxe-in-spring-app",
+                            "name": "java.security.xxe-in-spring-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-611"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.xxe-in-spring-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential XXE: untrusted input is parsed as an XML with safety flags disabled"
+                            },
+                            "help": {
+                                "text": "Potential XXE: untrusted input is parsed as an XML with safety flags disabled"
+                            },
+                            "id": "java.security.xxe-in-servlet-app",
+                            "name": "java.security.xxe-in-servlet-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-611"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.xxe-in-servlet-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential NoSQL injection: detected untrusted user input going into NoSQL query using the 'where' evaluation operator."
+                            },
+                            "help": {
+                                "text": "Potential NoSQL injection: detected untrusted user input going into NoSQL query using the 'where' evaluation operator."
+                            },
+                            "id": "java.security.mongodb-injection-in-spring-app",
+                            "name": "java.security.mongodb-injection-in-spring-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-943"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.mongodb-injection-in-spring-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Found object deserialization using ObjectInputStream with user-controlled input. Deserialization of entire Java objects is dangerous because malicious actors can create Java object streams with unintended consequences."
+                            },
+                            "help": {
+                                "text": "Found object deserialization using ObjectInputStream with user-controlled input. Deserialization of entire Java objects is dangerous because malicious actors can create Java object streams with unintended consequences."
+                            },
+                            "id": "java.security.unsafe-object-mapper-in-spring-app",
+                            "name": "java.security.unsafe-object-mapper-in-spring-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-502"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.unsafe-object-mapper-in-spring-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential path traversal: detected user input controlling a file path. An attacker could control the location of this file, to include going backwards in the directory with '../'. To address this, ensure that user-controlled variables in file paths are sanitized."
+                            },
+                            "help": {
+                                "text": "Potential path traversal: detected user input controlling a file path. An attacker could control the location of this file, to include going backwards in the directory with '../'. To address this, ensure that user-controlled variables in file paths are sanitized."
+                            },
+                            "id": "java.security.path-traversal-in-servlet-app",
+                            "name": "java.security.path-traversal-in-servlet-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-22"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.path-traversal-in-servlet-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential XSS: writing user input directly to a web page."
+                            },
+                            "help": {
+                                "text": "Potential XSS: writing user input directly to a web page."
+                            },
+                            "id": "java.security.xss-in-spring-app",
+                            "name": "java.security.xss-in-spring-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-79"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.xss-in-spring-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Found Jackson deserialization with user-controlled input."
+                            },
+                            "help": {
+                                "text": "Found Jackson deserialization with user-controlled input."
+                            },
+                            "id": "java.security.unsafe-jackson-deserialization-in-servlet-app",
+                            "name": "java.security.unsafe-jackson-deserialization-in-servlet-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-502"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.unsafe-jackson-deserialization-in-servlet-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential OS command injection: command line depends on a user provided value"
+                            },
+                            "help": {
+                                "text": "Potential OS command injection: command line depends on a user provided value"
+                            },
+                            "id": "java.security.os-command-injection-in-servlet-app",
+                            "name": "java.security.os-command-injection-in-servlet-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-78"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.os-command-injection-in-servlet-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential SQL injection: detected unescaped input from a user-manipulated data source going into a SQL sink or statement"
+                            },
+                            "help": {
+                                "text": "Potential SQL injection: detected unescaped input from a user-manipulated data source going into a SQL sink or statement"
+                            },
+                            "id": "java.security.sql-injection-in-servlet-app",
+                            "name": "java.security.sql-injection-in-servlet-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-89"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.sql-injection-in-servlet-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Found Jackson deserialization with user-controlled input."
+                            },
+                            "help": {
+                                "text": "Found Jackson deserialization with user-controlled input."
+                            },
+                            "id": "java.security.unsafe-jackson-deserialization-in-spring-app",
+                            "name": "java.security.unsafe-jackson-deserialization-in-spring-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-502"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.unsafe-jackson-deserialization-in-spring-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "If an attacker can supply values that the application then uses to determine which class to instantiate or which method to invoke, the potential exists for the attacker to create control flow paths through the application that were not intended by the application developers. This attack vector may allow the attacker to bypass authentication or access control checks or otherwise cause the application to behave in an unexpected manner."
+                            },
+                            "help": {
+                                "text": "If an attacker can supply values that the application then uses to determine which class to instantiate or which method to invoke, the potential exists for the attacker to create control flow paths through the application that were not intended by the application developers. This attack vector may allow the attacker to bypass authentication or access control checks or otherwise cause the application to behave in an unexpected manner."
+                            },
+                            "id": "java.security.unsafe-reflection-in-spring-app",
+                            "name": "java.security.unsafe-reflection-in-spring-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-470"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.unsafe-reflection-in-spring-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential code injection: calling Java Expression Language method directly with user-supplied input may allow an adversary to execute arbitrary Java code, including OS system commands."
+                            },
+                            "help": {
+                                "text": "Potential code injection: calling Java Expression Language method directly with user-supplied input may allow an adversary to execute arbitrary Java code, including OS system commands."
+                            },
+                            "id": "java.security.el-injection-in-servlet-app",
+                            "name": "java.security.el-injection-in-servlet-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-917"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.el-injection-in-servlet-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Insecure deserialization. Used SnakeYAML org.yaml.snakeyaml.Yaml() constructor on user-manipulater yaml data."
+                            },
+                            "help": {
+                                "text": "Insecure deserialization. Used SnakeYAML org.yaml.snakeyaml.Yaml() constructor on user-manipulater yaml data."
+                            },
+                            "id": "java.security.java-servlet-unsafe-snake-yaml-deserialization",
+                            "name": "java.security.java-servlet-unsafe-snake-yaml-deserialization",
+                            "properties": {
+                                "tags": [
+                                    "CWE-502"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.java-servlet-unsafe-snake-yaml-deserialization"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "The application allows user input to control format string parameters. By passing invalid format string specifiers an adversary could cause the application to throw exceptions or possibly leak internal information depending on application logic."
+                            },
+                            "help": {
+                                "text": "The application allows user input to control format string parameters. By passing invalid format string specifiers an adversary could cause the application to throw exceptions or possibly leak internal information depending on application logic."
+                            },
+                            "id": "java.security.format-string-external-manipulation-in-servlet-app",
+                            "name": "java.security.format-string-external-manipulation-in-servlet-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-134"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.format-string-external-manipulation-in-servlet-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential SSRF: the web server receives a URL or similar request from an upstream component and retrieves the contents of this URL, it does not sufficiently ensure that the request is being sent to the expected destination."
+                            },
+                            "help": {
+                                "text": "Potential SSRF: the web server receives a URL or similar request from an upstream component and retrieves the contents of this URL, it does not sufficiently ensure that the request is being sent to the expected destination."
+                            },
+                            "id": "java.security.ssrf-in-servlet-app",
+                            "name": "java.security.ssrf-in-servlet-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-918"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.ssrf-in-servlet-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "The application was found including unvalidated user input into a URL, which could lead to\nHTTP Parameter Pollution (HPP) or worse, Server Side Request Forgery (SSRF). This could\nallow an adversary to override the value of a URL or a request parameter.  HTTP Parameter\nPollution\n(HPP) attacks consist of injecting encoded query string delimiters into other existing\nparameters. If a web\napplication does not properly sanitize the user input, an adversary may modify the logic of\nthese\nrequests to other applications.\n\nTo remediate this issue, never allow user input directly into creation of a URL or URL\nparameter. Consider\nusing a map to look up user-supplied information and return exact values to be used in the\ngeneration of\nrequests.\n\nExample using a map to look up a key to be used in a HTTP request:\n```\nHashMap<String, String> lookupTable = new HashMap<>();\nlookupTable.put(\"key1\", \"value1\");\nlookupTable.put(\"key2\", \"value2\");\nString userInput = request.getParameter(\"key\");\n\n// Create a CloseableHttpClient, ideally any requests issued should be done\n// out-of-band from the servlet request itself (such as using a separate thread/scheduler\nsystem)\ntry (final CloseableHttpClient httpClient = HttpClients.createDefault()) {\n    // Lookup the value from our user input from our lookupTable\n    String value = lookupTable.getOrDefault(userInput, \"value1\");\n    // Construct the url, with the hardcoded url and only pass in the value from the\nlookupTable,\n    // not direct user input\n    final HttpGet httpget = new HttpGet(\"https://example.com/getId?key=\"+value);\n    // Execute the request\n    CloseableHttpResponse clientResponse = httpClient.execute(httpget);\n    // Read the response\n    byte[] responseData = clientResponse.getEntity().getContent().readAllBytes();\n    // Handle the response\n    // ...\n}\n```\n\nIf using a map is not possible, the user-supplied input must be encoded prior to use, and\nnever allow full\nURLs:\n```\n// Get user input\nString userInput = request.getParameter(\"key\");\n// Encode the string using java.net.URLEncoder with the UTF-8 character set\nString encodedString = java.net.URLEncoder.encode(userInput, StandardCharsets.UTF_8);\n// Create a CloseableHttpClient, ideally any requests issued should be done\n// out-of-band from the servlet request itself (such as using a separate thread/scheduler\nsystem)\ntry (final CloseableHttpClient httpClient = HttpClients.createDefault()) {\n  // Construct the url, with the hardcoded url and only pass in the encoded value, never a\nfull URL\n  final HttpGet httpget = new HttpGet(\"https://example.com/getId?key=\"+encodedString);\n  // Execute the request\n  CloseableHttpResponse clientResponse = httpClient.execute(httpget);\n  // Read the response\n  byte[] responseData = clientResponse.getEntity().getContent().readAllBytes();\n  // handle the response\n}\n```\n\nFor more information on SSRF see OWASP:\nhttps://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html\n\nFor more information on HTTP Parameter Pollution see:\nhttps://en.wikipedia.org/wiki/HTTP_parameter_pollution\n"
+                            },
+                            "help": {
+                                "text": "The application was found including unvalidated user input into a URL, which could lead to\nHTTP Parameter Pollution (HPP) or worse, Server Side Request Forgery (SSRF). This could\nallow an adversary to override the value of a URL or a request parameter.  HTTP Parameter\nPollution\n(HPP) attacks consist of injecting encoded query string delimiters into other existing\nparameters. If a web\napplication does not properly sanitize the user input, an adversary may modify the logic of\nthese\nrequests to other applications.\n\nTo remediate this issue, never allow user input directly into creation of a URL or URL\nparameter. Consider\nusing a map to look up user-supplied information and return exact values to be used in the\ngeneration of\nrequests.\n\nExample using a map to look up a key to be used in a HTTP request:\n```\nHashMap<String, String> lookupTable = new HashMap<>();\nlookupTable.put(\"key1\", \"value1\");\nlookupTable.put(\"key2\", \"value2\");\nString userInput = request.getParameter(\"key\");\n\n// Create a CloseableHttpClient, ideally any requests issued should be done\n// out-of-band from the servlet request itself (such as using a separate thread/scheduler\nsystem)\ntry (final CloseableHttpClient httpClient = HttpClients.createDefault()) {\n    // Lookup the value from our user input from our lookupTable\n    String value = lookupTable.getOrDefault(userInput, \"value1\");\n    // Construct the url, with the hardcoded url and only pass in the value from the\nlookupTable,\n    // not direct user input\n    final HttpGet httpget = new HttpGet(\"https://example.com/getId?key=\"+value);\n    // Execute the request\n    CloseableHttpResponse clientResponse = httpClient.execute(httpget);\n    // Read the response\n    byte[] responseData = clientResponse.getEntity().getContent().readAllBytes();\n    // Handle the response\n    // ...\n}\n```\n\nIf using a map is not possible, the user-supplied input must be encoded prior to use, and\nnever allow full\nURLs:\n```\n// Get user input\nString userInput = request.getParameter(\"key\");\n// Encode the string using java.net.URLEncoder with the UTF-8 character set\nString encodedString = java.net.URLEncoder.encode(userInput, StandardCharsets.UTF_8);\n// Create a CloseableHttpClient, ideally any requests issued should be done\n// out-of-band from the servlet request itself (such as using a separate thread/scheduler\nsystem)\ntry (final CloseableHttpClient httpClient = HttpClients.createDefault()) {\n  // Construct the url, with the hardcoded url and only pass in the encoded value, never a\nfull URL\n  final HttpGet httpget = new HttpGet(\"https://example.com/getId?key=\"+encodedString);\n  // Execute the request\n  CloseableHttpResponse clientResponse = httpClient.execute(httpget);\n  // Read the response\n  byte[] responseData = clientResponse.getEntity().getContent().readAllBytes();\n  // handle the response\n}\n```\n\nFor more information on SSRF see OWASP:\nhttps://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html\n\nFor more information on HTTP Parameter Pollution see:\nhttps://en.wikipedia.org/wiki/HTTP_parameter_pollution\n"
+                            },
+                            "id": "java.security.java-servlet-parameter-pollution",
+                            "name": "java.security.java-servlet-parameter-pollution",
+                            "properties": {
+                                "tags": [
+                                    "CWE-88"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.java-servlet-parameter-pollution"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "Application redirects to a destination URL specified by a user-supplied parameter that is not validated. This could direct users to malicious locations. Consider using an allowlist to validate URLs."
+                            },
+                            "help": {
+                                "text": "Application redirects to a destination URL specified by a user-supplied parameter that is not validated. This could direct users to malicious locations. Consider using an allowlist to validate URLs."
+                            },
+                            "id": "java.security.unvalidated-redirect-in-spring-app",
+                            "name": "java.security.unvalidated-redirect-in-spring-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-601"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.unvalidated-redirect-in-spring-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential LDAP injection: detected untrusted user input going into a LDAP query"
+                            },
+                            "help": {
+                                "text": "Potential LDAP injection: detected untrusted user input going into a LDAP query"
+                            },
+                            "id": "java.security.ldap-injection-in-servlet-app",
+                            "name": "java.security.ldap-injection-in-servlet-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-90"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.ldap-injection-in-servlet-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential LDAP injection: detected untrusted user input going into a LDAP query"
+                            },
+                            "help": {
+                                "text": "Potential LDAP injection: detected untrusted user input going into a LDAP query"
+                            },
+                            "id": "java.security.ldap-injection-in-spring-app",
+                            "name": "java.security.ldap-injection-in-spring-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-90"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.ldap-injection-in-spring-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential OS command injection: command line depends on a user provided value"
+                            },
+                            "help": {
+                                "text": "Potential OS command injection: command line depends on a user provided value"
+                            },
+                            "id": "java.security.os-command-injection-in-spring-app",
+                            "name": "java.security.os-command-injection-in-spring-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-78"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.os-command-injection-in-spring-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential SSRF: the web server receives a URL or similar request from an upstream component and retrieves the contents of this URL, but it does not sufficiently ensure that the request is being sent to the expected destination."
+                            },
+                            "help": {
+                                "text": "Potential SSRF: the web server receives a URL or similar request from an upstream component and retrieves the contents of this URL, but it does not sufficiently ensure that the request is being sent to the expected destination."
+                            },
+                            "id": "java.security.ssrf-in-spring-app",
+                            "name": "java.security.ssrf-in-spring-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-918"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.ssrf-in-spring-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Insecure deserialization. Used SnakeYAML org.yaml.snakeyaml.Yaml() constructor on user-manipulater yaml data."
+                            },
+                            "help": {
+                                "text": "Insecure deserialization. Used SnakeYAML org.yaml.snakeyaml.Yaml() constructor on user-manipulater yaml data."
+                            },
+                            "id": "java.security.spring-unsafe-snake-yaml-deserialization",
+                            "name": "java.security.spring-unsafe-snake-yaml-deserialization",
+                            "properties": {
+                                "tags": [
+                                    "CWE-502"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.spring-unsafe-snake-yaml-deserialization"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential XPath injection: detected input from a HTTP request going into a XPath evaluate or compile command."
+                            },
+                            "help": {
+                                "text": "Potential XPath injection: detected input from a HTTP request going into a XPath evaluate or compile command."
+                            },
+                            "id": "java.security.xpath-injection-in-spring-app",
+                            "name": "java.security.xpath-injection-in-spring-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-643"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.xpath-injection-in-spring-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "The `org.springframework.web.servlet.ModelAndView` class may potentially allow access to restricted files if called with user-supplied input. The ModelAndView class looks up a view by name to resolve a `.jsp` file. If this view name comes from user-supplied input, it could be abused to attempt to return a JSP view that the user should not have access to."
+                            },
+                            "help": {
+                                "text": "The `org.springframework.web.servlet.ModelAndView` class may potentially allow access to restricted files if called with user-supplied input. The ModelAndView class looks up a view by name to resolve a `.jsp` file. If this view name comes from user-supplied input, it could be abused to attempt to return a JSP view that the user should not have access to."
+                            },
+                            "id": "java.security.jsp-file-disclosure",
+                            "name": "java.security.jsp-file-disclosure",
+                            "properties": {
+                                "tags": [
+                                    "CWE-552"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.jsp-file-disclosure"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "Older Java application servers are vulnerable to HTTP response splitting, which may occur if an HTTP request can be injected with CRLF characters."
+                            },
+                            "help": {
+                                "text": "Older Java application servers are vulnerable to HTTP response splitting, which may occur if an HTTP request can be injected with CRLF characters."
+                            },
+                            "id": "java.security.http-response-splitting-in-spring-app",
+                            "name": "java.security.http-response-splitting-in-spring-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-113"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.http-response-splitting-in-spring-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential template injection: unvalidated user data flows into template engine"
+                            },
+                            "help": {
+                                "text": "Potential template injection: unvalidated user data flows into template engine"
+                            },
+                            "id": "java.security.ssti-in-servlet-app",
+                            "name": "java.security.ssti-in-servlet-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-94",
+                                    "CWE-1336"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.ssti-in-servlet-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential CRLF injection into SMTP message: the application was found calling `MimeMessage` methods without encoding new line characters. Much like HTTP, Simple Mail Transfer Protocol (SMTP) is a text based protocol that uses headers to convey additional directives for how email messages should be treated. An adversary could potentially cause email messages to be sent to unintended recipients by abusing the CC or BCC headers if they were able to inject them."
+                            },
+                            "help": {
+                                "text": "Potential CRLF injection into SMTP message: the application was found calling `MimeMessage` methods without encoding new line characters. Much like HTTP, Simple Mail Transfer Protocol (SMTP) is a text based protocol that uses headers to convey additional directives for how email messages should be treated. An adversary could potentially cause email messages to be sent to unintended recipients by abusing the CC or BCC headers if they were able to inject them."
+                            },
+                            "id": "java.security.java-servlet-smtp-crlf-injection",
+                            "name": "java.security.java-servlet-smtp-crlf-injection",
+                            "properties": {
+                                "tags": [
+                                    "CWE-77"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.java-servlet-smtp-crlf-injection"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "The application was found using user-supplied input in a `java.sql.Connection`'s `setCatalog` call. This could allow an adversary to supply a different database for the lifetime of the connection. Allowing external control of system settings can disrupt service or cause an application to behave in unexpected, and potentially malicious ways. Most likely this would only cause an error by providing a nonexistent catalog name."
+                            },
+                            "help": {
+                                "text": "The application was found using user-supplied input in a `java.sql.Connection`'s `setCatalog` call. This could allow an adversary to supply a different database for the lifetime of the connection. Allowing external control of system settings can disrupt service or cause an application to behave in unexpected, and potentially malicious ways. Most likely this would only cause an error by providing a nonexistent catalog name."
+                            },
+                            "id": "java.security.sql-catalog-external-manipulation-in-servlet-app",
+                            "name": "java.security.sql-catalog-external-manipulation-in-servlet-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-15"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.sql-catalog-external-manipulation-in-servlet-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential NoSQL injection: detected untrusted user input going into NoSQL query using the 'where' evaluation operator."
+                            },
+                            "help": {
+                                "text": "Potential NoSQL injection: detected untrusted user input going into NoSQL query using the 'where' evaluation operator."
+                            },
+                            "id": "java.security.mongodb-injection-in-servlet-app",
+                            "name": "java.security.mongodb-injection-in-servlet-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-943"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.mongodb-injection-in-servlet-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "The application was found using user-supplied input in a `java.sql.Connection`'s `setCatalog` call. This could allow an adversary to supply a different database for the lifetime of the connection. Allowing external control of system settings can disrupt service or cause an application to behave in unexpected, and potentially malicious ways. Most likely this would only cause an error by providing a nonexistent catalog name."
+                            },
+                            "help": {
+                                "text": "The application was found using user-supplied input in a `java.sql.Connection`'s `setCatalog` call. This could allow an adversary to supply a different database for the lifetime of the connection. Allowing external control of system settings can disrupt service or cause an application to behave in unexpected, and potentially malicious ways. Most likely this would only cause an error by providing a nonexistent catalog name."
+                            },
+                            "id": "java.security.sql-catalog-external-manipulation-in-spring-app",
+                            "name": "java.security.sql-catalog-external-manipulation-in-spring-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-15"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.sql-catalog-external-manipulation-in-spring-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Found object deserialization using ObjectInputStream with user-controlled input. Deserialization of entire Java objects is dangerous because malicious actors can create Java object streams with unintended consequences."
+                            },
+                            "help": {
+                                "text": "Found object deserialization using ObjectInputStream with user-controlled input. Deserialization of entire Java objects is dangerous because malicious actors can create Java object streams with unintended consequences."
+                            },
+                            "id": "java.security.unsafe-object-mapper-in-servlet-app",
+                            "name": "java.security.unsafe-object-mapper-in-servlet-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-502"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.unsafe-object-mapper-in-servlet-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Seam Logging API support an expression language to introduce bean property to log messages. The expression language can also be the source to unwanted code execution. In this context, an expression is built with a dynamic value. The source of the value(s) should be verified to avoid that unfiltered values fall into this risky code evaluation."
+                            },
+                            "help": {
+                                "text": "Seam Logging API support an expression language to introduce bean property to log messages. The expression language can also be the source to unwanted code execution. In this context, an expression is built with a dynamic value. The source of the value(s) should be verified to avoid that unfiltered values fall into this risky code evaluation."
+                            },
+                            "id": "java.security.seam-log-injection",
+                            "name": "java.security.seam-log-injection",
+                            "properties": {
+                                "tags": [
+                                    "CWE-95"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.seam-log-injection"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential code injection: OGNL expression construction from user-controlled input."
+                            },
+                            "help": {
+                                "text": "Potential code injection: OGNL expression construction from user-controlled input."
+                            },
+                            "id": "java.security.ognl-injection-in-servlet-app",
+                            "name": "java.security.ognl-injection-in-servlet-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-94"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.ognl-injection-in-servlet-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential code injection: ScriptEngine executes user-controled code.\n"
+                            },
+                            "help": {
+                                "text": "Potential code injection: ScriptEngine executes user-controled code.\n"
+                            },
+                            "id": "java.security.script-engine-injection-in-servlet-app",
+                            "name": "java.security.script-engine-injection-in-servlet-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-94"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.script-engine-injection-in-servlet-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential SQL injection: detected unescaped input from a user-manipulated data source going into a SQL sink or statement"
+                            },
+                            "help": {
+                                "text": "Potential SQL injection: detected unescaped input from a user-manipulated data source going into a SQL sink or statement"
+                            },
+                            "id": "java.security.sql-injection-in-spring-app",
+                            "name": "java.security.sql-injection-in-spring-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-89"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.sql-injection-in-spring-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential XSS: writing user input directly to a web page."
+                            },
+                            "help": {
+                                "text": "Potential XSS: writing user input directly to a web page."
+                            },
+                            "id": "java.security.xss-in-servlet-app",
+                            "name": "java.security.xss-in-servlet-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-79"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.xss-in-servlet-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential CRLF injection into SMTP message: The application was found calling `MimeMessage` methods without encoding new line characters. Much like HTTP, Simple Mail Transfer Protocol (SMTP) is a text based protocol that uses headers to convey additional directives for how email messages should be treated. An adversary could potentially cause email messages to be sent to unintended recipients by abusing the CC or BCC headers if they were able to inject them."
+                            },
+                            "help": {
+                                "text": "Potential CRLF injection into SMTP message: The application was found calling `MimeMessage` methods without encoding new line characters. Much like HTTP, Simple Mail Transfer Protocol (SMTP) is a text based protocol that uses headers to convey additional directives for how email messages should be treated. An adversary could potentially cause email messages to be sent to unintended recipients by abusing the CC or BCC headers if they were able to inject them."
+                            },
+                            "id": "java.security.spring-smtp-crlf-injection",
+                            "name": "java.security.spring-smtp-crlf-injection",
+                            "properties": {
+                                "tags": [
+                                    "CWE-77"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.spring-smtp-crlf-injection"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential code injection: ScriptEngine executes user-controled code."
+                            },
+                            "help": {
+                                "text": "Potential code injection: ScriptEngine executes user-controled code."
+                            },
+                            "id": "java.security.script-engine-injection-in-spring-app",
+                            "name": "java.security.script-engine-injection-in-spring-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-94"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.script-engine-injection-in-spring-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential path traversal: detected user input controlling a file path. An attacker could control the location of this file, to include going backwards in the directory with '../'. To address this, ensure that user-controlled variables in file paths are sanitized."
+                            },
+                            "help": {
+                                "text": "Potential path traversal: detected user input controlling a file path. An attacker could control the location of this file, to include going backwards in the directory with '../'. To address this, ensure that user-controlled variables in file paths are sanitized."
+                            },
+                            "id": "java.security.path-traversal-in-spring-app",
+                            "name": "java.security.path-traversal-in-spring-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-22"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.path-traversal-in-spring-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential code injeciton: OGNL expression construction from user-controlled input."
+                            },
+                            "help": {
+                                "text": "Potential code injeciton: OGNL expression construction from user-controlled input."
+                            },
+                            "id": "java.security.ognl-injection-in-spring-app",
+                            "name": "java.security.ognl-injection-in-spring-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-94"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.ognl-injection-in-spring-app"
+                            }
+                        },
+                        {
+                            "defaultConfiguration": {
+                                "level": "error"
+                            },
+                            "fullDescription": {
+                                "text": "Potential code injection: Groovy invocation with user-controlled input. This is a potential code injection."
+                            },
+                            "help": {
+                                "text": "Potential code injection: Groovy invocation with user-controlled input. This is a potential code injection."
+                            },
+                            "id": "java.security.groovy-injection-in-spring-app",
+                            "name": "java.security.groovy-injection-in-spring-app",
+                            "properties": {
+                                "tags": [
+                                    "CWE-94"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "Seqra Finding: java.security.groovy-injection-in-spring-app"
+                            }
+                        }
+                    ],
+                    "semanticVersion": "2.0.2",
+                    "version": "2025.12.26.2869bf0"
+                }
+            },
+            "results": []
+        }
+    ]
+}
